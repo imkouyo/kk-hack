@@ -1,0 +1,20 @@
+:host {
+  width: 100%;
+  .container {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    .group {
+      height: 330px;
+      padding: 0 32px;
+      .title {
+        color: white;
+        font-size: 28px;
+
+      }
+    }
+  }
+}
+

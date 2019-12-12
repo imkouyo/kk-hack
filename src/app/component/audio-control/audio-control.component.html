@@ -1,1 +1,4 @@
-<p>audio-control works!</p>
+<div class="container">
+  <div id="player"></div>
+</div>
+<youtube-player videoId="GkY9dFAECt8" (ready)="videoReady($event)" (stateChange)="videoState($event)" (error)="errorHandle($event)"></youtube-player>

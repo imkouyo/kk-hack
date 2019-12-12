@@ -8,6 +8,10 @@ import { AudioControlComponent } from './component/audio-control/audio-control.c
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { SearchPageComponent } from './component/search-page/search-page.component';
 import { LibaryPageComponent } from './component/libary-page/libary-page.component';
+import { HeaderComponent } from './component/header/header.component';
+import { MusicCardComponent } from './component/music-card/music-card.component';
+import { SurprisePageComponent } from './component/surprise-page/surprise-page.component';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -16,11 +20,15 @@ import { LibaryPageComponent } from './component/libary-page/libary-page.compone
     AudioControlComponent,
     HomePageComponent,
     SearchPageComponent,
-    LibaryPageComponent
+    LibaryPageComponent,
+    HeaderComponent,
+    MusicCardComponent,
+    SurprisePageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    YouTubePlayerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

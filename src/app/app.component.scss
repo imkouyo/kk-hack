@@ -1,0 +1,11 @@
+.container {
+  width: 100%;
+  height: calc( 100% + 150px);
+  background-color: #121212;
+  position: absolute;
+  display: flex;
+  margin: 0;
+  app-home-page {
+    width: 100%;
+  }
+}
