@@ -11,7 +11,9 @@ import { LibaryPageComponent } from './component/libary-page/libary-page.compone
 import { HeaderComponent } from './component/header/header.component';
 import { MusicCardComponent } from './component/music-card/music-card.component';
 import { SurprisePageComponent } from './component/surprise-page/surprise-page.component';
-import {YouTubePlayerModule} from '@angular/youtube-player';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     BrowserModule,
     AppRoutingModule,
     YouTubePlayerModule,
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

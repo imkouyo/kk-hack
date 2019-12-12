@@ -5,5 +5,10 @@
   <button (click)="pause()">pause</button>
   <button (click)="duration()">duration</button>
   <button (click)="currentTime()">currentTime</button>
+  <div class="time-panel">
+    <div class="current-time">{{currentMin}}:{{currentSec}}</div>
+    <mat-slider [min] = 0 [max] = 100 [value]="songProcessPercent" [step]="1"></mat-slider>
+    <div class="sum-time">{{durationMin}}:{{durationSec}}</div>
+  </div>
 </div>
 <youtube-player videoId="GkY9dFAECt8" (ready)="videoReady($event)" (stateChange)="videoState($event)" (error)="errorHandle($event)"></youtube-player>

@@ -4,5 +4,30 @@
   position: fixed;
   bottom: 0;
   background-color: #282828;
+  .time-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: 5px solid #fff;
+      height: 14px;
+      width: 14px;
+      border-radius: 8px;
+      background: #1ba1e2;
+      cursor: pointer;
+    }
+    input[type='range']::-moz-range-thumb {
+      border: 3px solid #fff;
+      height: 7px;
+      width: 7px;
+      border-radius: 8px;
+      background: #1ba1e2;
+      cursor: pointer;
+    }
+    * {
+      padding: 10px;
+    }
+  }
 
 }

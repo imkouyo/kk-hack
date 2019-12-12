@@ -9,6 +9,13 @@ export class AudioControlComponent implements OnInit {
 
   constructor() { }
   player: any;
+  durationMin: string;
+  durationSec: string;
+  currentMin: string;
+  currentSec: string;
+  currentDuration = 0;
+  songProcessPercent: number;
+  intv;
   ngOnInit() {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -18,10 +25,42 @@ export class AudioControlComponent implements OnInit {
   videoReady(event) {
     console.log('ready', event);
     this.player =  event.target;
+    const duration = this.player.getDuration();
+    this.durationMin = Math.floor(duration / 60).toString();
+    this.durationSec =  (duration % 60) < 10 ? `0${duration % 60}` : (duration % 60).toString();
+    this.currentMin = '0';
+    this.currentSec = '00';
   }
 
   videoState(event) {
     console.log('state', event);
+
+    if (event.data === 1 ) {
+      if (!this.intv) {
+        this.intv = setInterval(() => {
+          this.currentDuration += 1;
+          this.songProcessPercent =  Math.floor((this.currentDuration * 100) / this.duration());
+          this.currentMin = Math.floor(this.currentDuration / 60).toString();
+          this.currentSec =  (this.currentDuration  % 60) < 10 ?
+            `0${this.currentDuration  % 60}` : (this.currentDuration  % 60).toString();
+          console.log(this.songProcessPercent, this.currentDuration);
+        }, 1000);
+      }
+    } else if (event.data === 2) {
+      if (this.intv) {
+        clearInterval(this.intv);
+        this.intv = false;
+      }
+    } else if (event.data === 3) {
+      this.currentDuration = 0;
+    } else if (event.data === 5) {
+      if (this.intv) {
+        clearInterval(this.intv);
+        this.intv = false;
+        this.currentMin = '0';
+        this.currentSec = '00';
+      }
+    }
   }
 
   errorHandle(event) {
@@ -42,7 +81,7 @@ export class AudioControlComponent implements OnInit {
   }
 
   duration() {
-    console.log(this.player.getDuration());
+    return this.player.getDuration();
   }
 
 }
