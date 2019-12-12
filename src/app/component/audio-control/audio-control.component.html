@@ -1,4 +1,9 @@
 <div class="container">
   <div id="player"></div>
+  <button (click)="play()">play</button>
+  <button (click)="stop()">stop</button>
+  <button (click)="pause()">pause</button>
+  <button (click)="duration()">duration</button>
+  <button (click)="currentTime()">currentTime</button>
 </div>
 <youtube-player videoId="GkY9dFAECt8" (ready)="videoReady($event)" (stateChange)="videoState($event)" (error)="errorHandle($event)"></youtube-player>
