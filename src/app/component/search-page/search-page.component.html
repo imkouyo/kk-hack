@@ -1,7 +1,10 @@
-<div class="container" #commentBoard>
+<div class="container">
+  <div class="comment-overlay" #commentBoard></div>
+  <app-message-box></app-message-box>
 </div>
-<form>
 
-</form>
+
 <input type="text" [(ngModel)]="text" >
 <button (click)="insert()">insert</button>
+
+

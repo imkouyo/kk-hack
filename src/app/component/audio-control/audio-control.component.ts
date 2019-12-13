@@ -28,6 +28,7 @@ export class AudioControlComponent implements OnInit {
   }
 
   videoReady(event) {
+    this.currentDuration = 0;
     console.log('ready', event);
     this.player =  event.target;
     const duration = this.player.getDuration();
@@ -39,8 +40,9 @@ export class AudioControlComponent implements OnInit {
 
   videoState(event) {
     console.log('state', event);
-
-    if (event.data === 1 ) {
+    if (event.data === 0) {
+      this.stop();
+    } else if (event.data === 1 ) {
       this.isPlaying = true;
       if (!this.intv) {
         this.intv = setInterval(() => {
@@ -60,8 +62,8 @@ export class AudioControlComponent implements OnInit {
       }
     } else if (event.data === 3) {
       this.isPlaying = false;
-      this.currentDuration = 0;
     } else if (event.data === 5) {
+      this.currentDuration = 0;
       this.isPlaying = false;
       if (this.intv) {
         clearInterval(this.intv);
@@ -75,9 +77,14 @@ export class AudioControlComponent implements OnInit {
     console.log(event.value);
     const currentPercentage = event.value;
     const seek =  Math.floor(this.duration() * currentPercentage / 100);
+    this.currentDuration = seek;
+    this.songProcessPercent =  Math.floor((this.currentDuration * 100) / this.duration());
+    this.currentMin = Math.floor(this.currentDuration / 60).toString();
+    this.currentSec =  (this.currentDuration  % 60) < 10 ?
+      `0${this.currentDuration  % 60}` : (this.currentDuration  % 60).toString();
    // this.player.pause();
    // event
-   // this.player.seekTo(seek);
+    this.player.seekTo(seek);
   }
 
   errorHandle(event) {

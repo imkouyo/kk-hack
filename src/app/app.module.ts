@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
+import { MessageBoxComponent } from './component/message-box/message-box.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {FormsModule} from '@angular/forms';
     LibaryPageComponent,
     HeaderComponent,
     MusicCardComponent,
-    SurprisePageComponent
+    SurprisePageComponent,
+    MessageBoxComponent
   ],
   imports: [
     BrowserModule,

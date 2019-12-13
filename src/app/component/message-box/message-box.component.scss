@@ -1,0 +1,42 @@
+.container {
+  width: 300px;
+  min-height: 370px;
+  height: 100%;
+  border: solid white 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .chat-header {
+    width: 100%;
+    height: 48px;
+    padding: 8px;
+    background-color: #282828;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    .title {
+      padding-left: 8px;
+      color: #aaaaaa
+    }
+  }
+  .chat-bottom {
+    box-sizing: border-box;
+    background-color: #282828;
+    height: 80px;
+    .chat-panel {
+      padding: 12px;
+      input{
+        padding: 2px;
+        line-height: 18px;
+        background-color: #282828;
+        border: 0;
+        border-bottom: #666 solid 1.5px;
+      }
+      input:focus {
+        outline: none;
+        border-bottom: #3EE6FF solid 1.5px;
+        animation: ease-in 5s ;
+      }
+    }
+  }
+}
