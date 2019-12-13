@@ -71,6 +71,14 @@ export class AudioControlComponent implements OnInit {
       }
     }
   }
+  slideTime(event) {
+    console.log(event.value);
+    const currentPercentage = event.value;
+    const seek =  Math.floor(this.duration() * currentPercentage / 100);
+   // this.player.pause();
+   // event
+   // this.player.seekTo(seek);
+  }
 
   errorHandle(event) {
     console.log('error', event);

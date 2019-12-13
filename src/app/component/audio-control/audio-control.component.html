@@ -19,7 +19,7 @@
     </div>
     <div class="time-panel">
       <div class="current-time">{{currentMin}}:{{currentSec}}</div>
-      <mat-slider [min] = 0 [max] = 100 [value]="songProcessPercent" [step]="1"></mat-slider>
+      <mat-slider [min] = 0 [max] = 100 [value]="songProcessPercent" [step]="1" (change)="slideTime($event)"></mat-slider>
       <div class="sum-time">{{durationMin}}:{{durationSec}}</div>
     </div>
   </div>
