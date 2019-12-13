@@ -1,14 +1,28 @@
 <div class="container">
-  <div id="player"></div>
-  <button (click)="play()">play</button>
-  <button (click)="stop()">stop</button>
-  <button (click)="pause()">pause</button>
-  <button (click)="duration()">duration</button>
-  <button (click)="currentTime()">currentTime</button>
-  <div class="time-panel">
-    <div class="current-time">{{currentMin}}:{{currentSec}}</div>
-    <mat-slider [min] = 0 [max] = 100 [value]="songProcessPercent" [step]="1"></mat-slider>
-    <div class="sum-time">{{durationMin}}:{{durationSec}}</div>
+  <div class="thumbnail-group">
+    <div class="thumbnail-imc"></div>
+    <div class="thumbnail-description">
+      <div class="thumbnail-title">Owen</div>
+      <div class="thumbnail-text">Sing the song</div>
+    </div>
   </div>
+<!--  <button (click)="play()">play</button>-->
+<!--  <button (click)="stop()">stop</button>-->
+<!--  <button (click)="pause()">pause</button>-->
+<!--  <button (click)="duration()">duration</button>-->
+<!--  <button (click)="currentTime()">currentTime</button>-->
+  <div class="panel-group">
+    <div class="music-panel">
+      <fa-icon *ngIf="!isPlaying" [icon]="faPlay" (click)="play()"></fa-icon>
+      <fa-icon *ngIf="isPlaying" [icon]="faPause" (click)="pause()"></fa-icon>
+      <fa-icon [icon]="faStop" (click)="stop()"></fa-icon>
+    </div>
+    <div class="time-panel">
+      <div class="current-time">{{currentMin}}:{{currentSec}}</div>
+      <mat-slider [min] = 0 [max] = 100 [value]="songProcessPercent" [step]="1"></mat-slider>
+      <div class="sum-time">{{durationMin}}:{{durationSec}}</div>
+    </div>
+  </div>
+  <div></div>
 </div>
 <youtube-player videoId="GkY9dFAECt8" (ready)="videoReady($event)" (stateChange)="videoState($event)" (error)="errorHandle($event)"></youtube-player>

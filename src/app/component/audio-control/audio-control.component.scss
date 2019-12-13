@@ -4,30 +4,91 @@
   position: fixed;
   bottom: 0;
   background-color: #282828;
-  .time-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    input[type='range']::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      border: 5px solid #fff;
-      height: 14px;
-      width: 14px;
-      border-radius: 8px;
-      background: #1ba1e2;
-      cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .panel-group {
+    max-width: 720px;
+    width: 70%;
+    .music-panel {
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      & > * {
+        padding: 15px 15px 0 15px;
+        color: white;
+      }
     }
-    input[type='range']::-moz-range-thumb {
-      border: 3px solid #fff;
-      height: 7px;
-      width: 7px;
-      border-radius: 8px;
-      background: #1ba1e2;
-      cursor: pointer;
-    }
-    * {
-      padding: 10px;
+    .time-panel {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      * {
+        padding: 10px;
+      }
+      mat-slider {
+        width: 100%;
+        &.mat-slider.mat-accent.mat-slider-horizontal::ng-deep {
+          .mat-slider-thumb {
+            visibility: hidden;
+            background-color: greenyellow;
+          }
+          .mat-slider-track-fill {
+            background-color: greenyellow;
+          }
+        }
+      }
+
+      mat-slider:hover {
+        &.mat-slider.mat-accent.mat-slider-horizontal::ng-deep {
+          .mat-slider-thumb {
+            visibility: visible;
+            background-color: greenyellow;
+          }
+        }
+        &.mat-slider.mat-accent.mat-slider-horizontal.mat-slider-min-value::ng-deep {
+          .mat-slider-thumb {
+            transform: scale(.6);
+            background-color: #555555;
+          }
+        }
+        &.mat-slider.mat-accent.mat-slider-horizontal.cdk-focused.cdk-mouse-focused::ng-deep {
+          .mat-slider-thumb {
+            transform: scale(.7);
+            background-color: greenyellow;
+          }
+          .mat-slider-track-fill {
+            background-color: greenyellow;
+          }
+        }
+        &.mat-slider.mat-accent.mat-slider-horizontal.cdk-focused::ng-deep {
+          .mat-slider-track-fill {
+            background-color: greenyellow;
+          }
+        }
+      }
     }
   }
+  .thumbnail-group {
+    display: flex;
+    align-items: center;
+    .thumbnail-imc {
+      width: 56px;
+      height: 56px;
+    }
+    .thumbnail-description {
+      display: flex;
+      flex-direction: column;
+      .thumbnail-title {
+        font-size: 14px;
+      }
+      .thumbnail-text {
+        font-size: 12px;
+      }
+    }
+  }
+
+
 
 }

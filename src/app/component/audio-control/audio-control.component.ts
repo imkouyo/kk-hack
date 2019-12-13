@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-audio-control',
@@ -9,13 +10,17 @@ export class AudioControlComponent implements OnInit {
 
   constructor() { }
   player: any;
-  durationMin: string;
-  durationSec: string;
-  currentMin: string;
-  currentSec: string;
+  durationMin = '0';
+  durationSec = '00';
+  currentMin = '0';
+  currentSec = '00';
   currentDuration = 0;
   songProcessPercent: number;
   intv;
+  faPlay = faPlay;
+  faPause = faPause;
+  faStop = faStop;
+  isPlaying = false;
   ngOnInit() {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -36,6 +41,7 @@ export class AudioControlComponent implements OnInit {
     console.log('state', event);
 
     if (event.data === 1 ) {
+      this.isPlaying = true;
       if (!this.intv) {
         this.intv = setInterval(() => {
           this.currentDuration += 1;
@@ -47,13 +53,16 @@ export class AudioControlComponent implements OnInit {
         }, 1000);
       }
     } else if (event.data === 2) {
+      this.isPlaying = false;
       if (this.intv) {
         clearInterval(this.intv);
         this.intv = false;
       }
     } else if (event.data === 3) {
+      this.isPlaying = false;
       this.currentDuration = 0;
     } else if (event.data === 5) {
+      this.isPlaying = false;
       if (this.intv) {
         clearInterval(this.intv);
         this.intv = false;

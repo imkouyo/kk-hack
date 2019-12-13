@@ -14,6 +14,8 @@ import { SurprisePageComponent } from './component/surprise-page/surprise-page.c
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MatSliderModule } from '@angular/material';
     AppRoutingModule,
     YouTubePlayerModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
