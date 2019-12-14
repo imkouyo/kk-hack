@@ -4,13 +4,19 @@
       Chat Box Message
     </div>
   </div>
-  <div class="chat-content">
-
+  <div class="chat-content" #content>
+    <div class="message" *ngFor="let mes of messages">
+<!--      <p class="title" [attr.color]="mes.color">Anonymous:</p>-->
+      <p class="text" [attr.color]="mes.color">{{mes.text}}</p>
+    </div>
   </div>
   <div class="chat-bottom">
     <div class="chat-panel">
-      <input type="text" [(ngModel)]="text" placeholder="Mesage ...">
-      <fa-icon [icon]="faPaperPlane" (click)="sendMessage()"></fa-icon>
+      <div class="in">
+        <input type="text" [(ngModel)]="text" placeholder="Message ..." (keypress)="enterMessage($event)">
+        <div class="border-in"></div>
+      </div>
+      <fa-icon [icon]="faPaperPlane" size="1x" (click)="sendMessage()"></fa-icon>
     </div>
 </div>
 </div>

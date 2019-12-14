@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, Renderer2} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, Renderer2 } from '@angular/core';
+import { faVideo } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-slide-bar',
@@ -6,7 +7,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, View
   styleUrls: ['./slide-bar.component.scss']
 })
 export class SlideBarComponent implements OnInit, AfterViewInit{
-
+  faVideo = faVideo;
   constructor(private renderer: Renderer2) { }
   @ViewChildren('item') components: QueryList<ElementRef>;
   ngOnInit() {
@@ -18,7 +19,6 @@ export class SlideBarComponent implements OnInit, AfterViewInit{
 
   switchPage(event) {
     console.log(event);
-    //c
   }
 
 }
