@@ -1,6 +1,7 @@
 import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { CommentService } from '../../service/comment.service';
 import { Messages } from '../../Interface/Messages';
+import { AudioControlService } from '../../service/audio-control.service';
 
 @Component({
   selector: 'app-comment-page',
@@ -8,9 +9,10 @@ import { Messages } from '../../Interface/Messages';
   styleUrls: ['./comment-page.component.scss']
 })
 export class CommentPageComponent implements OnInit {
-
   @ViewChild('commentBoard', {static: true }) elementRef;
-  constructor(private renderer: Renderer2, private commentService: CommentService) { }
+  constructor(private renderer: Renderer2,
+              private commentService: CommentService,
+              private audioControlService: AudioControlService) { }
   ngOnInit() {
     this.commentService.comment.subscribe( (comment) => this.insert(comment));
   }
@@ -31,5 +33,16 @@ export class CommentPageComponent implements OnInit {
     const textEle = this.renderer.createText(message.text);
     this.renderer.appendChild(cmt, textEle);
     return cmt;
+  }
+  videoReady(event) {
+    this.audioControlService.setReadyState(99);
+    this.audioControlService.player = event.target;
+  }
+
+  videoState(event) {
+    this.audioControlService.audioState(event);
+  }
+  change() {
+    this.audioControlService.player.cueVideoById('t60GbzFW-Ao');
   }
 }

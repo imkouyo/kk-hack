@@ -1,9 +1,10 @@
 <app-header></app-header>
 <div class="container">
-  <div class="comment-overlay" #commentBoard>
-    <!--    <youtube-player videoId="GkY9dFAECt8"></youtube-player>-->
+  <div class="comment-container">
+    <youtube-player videoId="GkY9dFAECt8" (ready)="videoReady($event)" (stateChange)="videoState($event)" [height]="600" [width]="800"></youtube-player>
+    <div class="comment-overlay" #commentBoard></div>
   </div>
+
   <app-message-box ></app-message-box>
 </div>
-
 
