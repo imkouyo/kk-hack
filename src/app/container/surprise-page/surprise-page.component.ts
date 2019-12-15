@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild, ViewChildren} from '@angular/core';
 import {Sentence} from '../../Interface/Sentence';
+import { AudioControlService } from '../../service/audio-control.service';
 
 @Component({
   selector: 'app-surprise-page',
@@ -8,18 +9,23 @@ import {Sentence} from '../../Interface/Sentence';
 })
 export class SurprisePageComponent implements OnInit {
   text: string;
+  isComplete = false;
   story: Sentence[] = [
-    { page: 1, sumPage: 3, text: 'Did you see this?'},
-    { page: 2, sumPage: 3, text: 'Are you ready to attend KKBox hack-thon!!'},
-    { page: 3, sumPage: 3, text: 'I Have new Idea for like this.'}
-  ]
-  ;
+    { page: 1, sumPage: 6, text: 'Hi XXX!'},
+    { page: 2, sumPage: 6, text: 'I want to tell you.'},
+    { page: 3, sumPage: 6, text: 'I\'m happy because of you!'},
+    { page: 4, sumPage: 6, text: 'Thanks You always here for me.'},
+    { page: 5, sumPage: 6, text: 'And this song is dedicate for you.'},
+    { page: 6, sumPage: 6, text: 'Hope you will like it'}
+  ];
   @ViewChild('board', { static: true}) board: ElementRef;
-  constructor(private renderer: Renderer2) { }
+  @ViewChild('completeBoard', { static: true}) completeBoard: ElementRef;
+  constructor(private renderer: Renderer2, private audioControlService: AudioControlService) { }
+
   async ngOnInit() {
-    this.text = 'Hi Owen!!';
+    this.audioControlService.isDisable = true;
     for await ( const i of this.story) {
-      await this.timeout(5000);
+      await this.timeout(8000);
       this.talk(i);
     }
   }
@@ -29,12 +35,42 @@ export class SurprisePageComponent implements OnInit {
     const te = this.renderer.createText(sentence.text);
     this.renderer.appendChild(el, te);
     this.renderer.appendChild(this.board.nativeElement, el);
+    if (sentence.page === sentence.sumPage) {
+      this.startMusic();
+      setTimeout(() => {
+        this.isComplete = true;
+        for (const i of this.story) {
+          const ele = this.renderer.createElement('div');
+          this.renderer.appendChild(ele, this.renderer.createText(i.text));
+          this.renderer.appendChild(this.completeBoard.nativeElement, ele);
+        }
+      }, 12000);
+    }
+    setTimeout(() => {
+      this.renderer.removeChild(this.board.nativeElement, el);
+    }, 7500);
   }
 
   timeout(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
-    }
   }
+  startMusic() {
+    this.audioControlService.player.seekTo(70);
+    this.audioControlService.player.setVolume(0);
+    this.audioControlService.play();
+    const interval = setInterval(() => {
+      if (this.audioControlService.player.getVolume() === 100) {
+        clearInterval(interval);
+      } else {
+        this.audioControlService.player.setVolume(this.audioControlService.player.getVolume() + 5);
+      }
+    }, 800);
+  }
+  videoReady(event) {
+    this.audioControlService.player = event.target;
+  }
+
+}
 
 
 

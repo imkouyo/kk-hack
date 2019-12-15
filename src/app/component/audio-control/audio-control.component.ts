@@ -20,7 +20,7 @@ export class AudioControlComponent implements OnInit {
   songPercentage: number;
   currentMin;
   currentSec;
-  constructor(private audioControlService: AudioControlService, private timeFormatService: TimeFormatService) { }
+  constructor(public audioControlService: AudioControlService, private timeFormatService: TimeFormatService) { }
   ngOnInit() {
     this.audioControlService.currentDuration$.subscribe(time => {
       this.currentDuration = time;
@@ -34,21 +34,30 @@ export class AudioControlComponent implements OnInit {
   }
 
   videoReady() {
-    const duration = this.audioControlService.duration();
-    this.durationMin = this.timeFormatService.secToMin(duration);
-    this.durationSec = this.timeFormatService.secToSec(duration);
+    if (!this.audioControlService.isDisable) {
+      const duration = this.audioControlService.duration();
+      this.durationMin = this.timeFormatService.secToMin(duration);
+      this.durationSec = this.timeFormatService.secToSec(duration);
+    }
   }
   slideTime(event) {
-    console.log(event.value);
-    this.audioControlService.audioSeek(event.value);
+    if (!this.audioControlService.isDisable) {
+      this.audioControlService.audioSeek(event.value);
+    }
   }
   play() {
-    this.audioControlService.play();
+    if (!this.audioControlService.isDisable) {
+      this.audioControlService.play();
+    }
   }
   pause() {
-    this.audioControlService.pause();
+    if (!this.audioControlService.isDisable) {
+      this.audioControlService.pause();
+    }
   }
   stop() {
-    this.audioControlService.stop();
+    if (!this.audioControlService.isDisable) {
+      this.audioControlService.stop();
+    }
   }
 }

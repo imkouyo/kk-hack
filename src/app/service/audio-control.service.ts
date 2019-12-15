@@ -8,7 +8,8 @@ import { TimeFormatService } from './time-format.service';
 export class AudioControlService {
 
 
-
+  // tslint:disable-next-line:variable-name
+  private _isDisable;
   // tslint:disable-next-line:variable-name
   private _player;
   // tslint:disable-next-line:variable-name
@@ -21,6 +22,12 @@ export class AudioControlService {
   private ready = new Subject<number>();
   public ready$ = this.ready.asObservable();
   constructor(private timeFormatService: TimeFormatService) { }
+  set isDisable(state) {
+    this._isDisable = state;
+  }
+  get isDisable() {
+    return this._isDisable;
+  }
   set player(element) {
     this._player = element;
   }

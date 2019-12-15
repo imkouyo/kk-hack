@@ -1,3 +1,7 @@
-<div class="typewriter" #board>
-  <div class="typewriter-text">{{text}}</div>
+<div class="container">
+  <div class="typewriter" #board>
+    <div class="typewriter-text">{{text}}</div>
+    <div class="complete-text" [ngStyle]="{'display': isComplete? 'block': 'none'}" #completeBoard></div>
+  </div>
 </div>
+<youtube-player style="display: none" videoId="S_E2EHVxNAE" (ready)="videoReady($event)"></youtube-player>

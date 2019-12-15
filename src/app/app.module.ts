@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { MessageBoxComponent } from './component/message-box/message-box.component';
 import { CommentPageComponent } from './container/comment-page/comment-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,11 +37,12 @@ import { CommentPageComponent } from './container/comment-page/comment-page.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     YouTubePlayerModule,
     BrowserAnimationsModule,
     MatSliderModule,
     FontAwesomeModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
