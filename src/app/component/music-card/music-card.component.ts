@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-music-card',
@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-card.component.scss']
 })
 export class MusicCardComponent implements OnInit {
-
+  @Input() imgSrc;
+  @Input() description;
+  @Input() title;
+  @Input() playlistID;
   constructor() { }
 
   ngOnInit() {

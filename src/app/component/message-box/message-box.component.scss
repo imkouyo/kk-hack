@@ -97,8 +97,8 @@
         .border-in {
           display: block;
           height: 2px;
-          width: 100%;
-          top:24px;
+          width: calc(100% - 24px);
+          top:23px;
           position: absolute;
           background: #2bcfff;
           transform: scaleX(0);

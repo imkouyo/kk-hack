@@ -1,17 +1,28 @@
 :host {
   width: 100%;
+  height: 100%;
   .container {
+    width: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
-    width: 100%;
     box-sizing: border-box;
+    padding-right: 200px;
     .group {
-      height: 330px;
+      height: 100%;
       padding: 0 32px;
+      display: flex;
+      flex-direction: column;
       .title {
         color: white;
         font-size: 28px;
+      }
+      .card-group {
+        display: flex;
+        width: 100%;
+        app-music-card {
+          margin: 10px 8px;
+        }
       }
     }
   }

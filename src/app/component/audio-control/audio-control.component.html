@@ -18,6 +18,9 @@
       <div class="sum-time">{{durationMin}}:{{durationSec}}</div>
     </div>
   </div>
-  <div></div>
+  <div class="volume-panel">
+    <fa-icon [icon]="faVolumeUp"></fa-icon>
+    <mat-slider [min] = 0 [max] = 100 [value]="volume" [step]="1" (change)="slideVolume($event)"></mat-slider>
+  </div>
 </div>
 

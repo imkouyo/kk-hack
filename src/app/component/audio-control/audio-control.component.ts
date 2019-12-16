@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
+import {faPause, faPlay, faStop, faVolumeUp} from '@fortawesome/free-solid-svg-icons';
 import { AudioControlService } from '../../service/audio-control.service';
 import { TimeFormatService } from '../../service/time-format.service';
 
@@ -13,6 +13,7 @@ export class AudioControlComponent implements OnInit {
   faPause = faPause;
   faPlay = faPlay;
   faStop = faStop;
+  faVolumeUp = faVolumeUp;
 
   currentDuration: number;
   durationMin = '0';
@@ -20,6 +21,7 @@ export class AudioControlComponent implements OnInit {
   songPercentage: number;
   currentMin;
   currentSec;
+  volume;
   constructor(public audioControlService: AudioControlService, private timeFormatService: TimeFormatService) { }
   ngOnInit() {
     this.audioControlService.currentDuration$.subscribe(time => {
@@ -29,13 +31,15 @@ export class AudioControlComponent implements OnInit {
       this.currentMin = this.timeFormatService.secToMin(time);
     });
     this.audioControlService.ready$.subscribe(state => {
-        this.videoReady();
+      console.log(state);
+      this.videoReady();
     });
   }
 
   videoReady() {
     if (!this.audioControlService.isDisable) {
       const duration = this.audioControlService.duration();
+      this.volume = this.audioControlService.player.getVolume();
       this.durationMin = this.timeFormatService.secToMin(duration);
       this.durationSec = this.timeFormatService.secToSec(duration);
     }
@@ -43,6 +47,11 @@ export class AudioControlComponent implements OnInit {
   slideTime(event) {
     if (!this.audioControlService.isDisable) {
       this.audioControlService.audioSeek(event.value);
+    }
+  }
+  slideVolume(event) {
+    if (!this.audioControlService.isDisable) {
+      this.audioControlService.player.setVolume(event.value);
     }
   }
   play() {

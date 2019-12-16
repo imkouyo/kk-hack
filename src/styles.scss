@@ -1,48 +1,8 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$kk-hack-primary: mat-palette($mat-indigo);
-$kk-hack-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$kk-hack-warn: mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$kk-hack-theme: mat-light-theme($kk-hack-primary, $kk-hack-accent, $kk-hack-warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($kk-hack-theme);
-
-/* You can add global styles to this file, and also import other style files */
-/* css reset www.admin10000.com */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
-body { background:#fff; color:#555; font-size:14px; font-family: Verdana, Arial, Helvetica, sans-serif; }
-td,th,caption { font-size:14px; }
-h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
-address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
-a { color:#555; text-decoration:none; }
-a:hover { text-decoration:underline; }
-img { border:none; }
-ol,ul,li { list-style:none; }
-input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
-table { border-collapse:collapse; }
-html {overflow-y: scroll;}
-/* css common */
-.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
-.clearfix { *zoom:1; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  margin: 0;
+  padding: 0;
+  color: #666;
+  font-family: proxima-nova-soft, sans-serif;
+  font-style: normal;
+  font-weight: 100;
+}

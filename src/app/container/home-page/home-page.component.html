@@ -3,7 +3,14 @@
   <div class="section">
     <div class="group">
       <div class="title">Made for you</div>
-      <app-music-card></app-music-card>
+      <div class="card-group">
+        <app-music-card *ngFor="let item of newHitsPlaylist"
+                        [imgSrc]="item.images[0]['url']"
+                        [playlistID]="item.id"
+                        [title]="item.title"
+                        [description]="item.description"
+        ></app-music-card>
+      </div>
     </div>
     <div class="group">
       <div class="title">What's new</div>

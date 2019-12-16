@@ -1,94 +1,87 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Api } from '@kkbox/kkbox-js-sdk';
+import {BehaviorSubject, from} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KkHackService {
 
-  ACCESSTOKEN: string;
-  api;
-
+  private token: string;
+  private api;
+  private isReady = new BehaviorSubject<boolean>(false);
+  public  isReady$ = this.isReady.asObservable();
   constructor(private httpClient: HttpClient) {
   }
 
   getToken() {
     this.httpClient.get('/getToken').subscribe(
       token => {
-        this.ACCESSTOKEN = token.toString();
-        console.log(this.ACCESSTOKEN);
-        this.api = new Api(this.ACCESSTOKEN);
+        this.token = token.toString();
+        console.log(this.token);
+        this.api = new Api(this.token);
+        this.isReady.next(true);
       }
     );
   }
   // all playlist
   fetchNewHitsAllPlaylist() {
-    this.api.newHitsPlaylistFetcher.fetchAllNewHitsPlaylists().then(data => console.log(data));
+    return from( this.api.newHitsPlaylistFetcher.fetchAllNewHitsPlaylists());
   }
-
   // specific playlist for info by id
   fetchNewHitsAllPlaylistById(id) {
-    this.api.newHitsPlaylistFetcher.setPlaylistID('DZrC8m29ciOFY2JAm3').fetchMetadata().then(data => console.log(data));
+    return from( this.api.newHitsPlaylistFetcher.setPlaylistID('DZrC8m29ciOFY2JAm3').fetchMetadata());
   }
-
   // specific playlist for tracker by id
   fetchNewHitsAllPlaylistTrackerById(id) {
-    this.api.newHitsPlaylistFetcher.setPlaylistID('DZrC8m29ciOFY2JAm3').fetchTracks().then(data => console.log(data));
+    return from( this.api.newHitsPlaylistFetcher.setPlaylistID('DZrC8m29ciOFY2JAm3').fetchTracks());
   }
   // specific category playlist info
   fetchCategoryPlaylist() {
-    this.api.newReleaseCategoryFetcher.setCategoryID('Cng5IUIQhxb8w1cbsz').fetchAlbums().then(data => console.log(data));
+    return from( this.api.newReleaseCategoryFetcher.setCategoryID('Cng5IUIQhxb8w1cbsz').fetchAlbums());
   }
   // specific category info
   fetchCategoryPlaylistMetaData() {
-    this.api.newReleaseCategoryFetcher.setCategoryID('Cng5IUIQhxb8w1cbsz').fetchMetadata().then(data => console.log(data));
+    return from( this.api.newReleaseCategoryFetcher.setCategoryID('Cng5IUIQhxb8w1cbsz').fetchMetadata());
   }
 
   // all category info
   fetchAllCategoryMetaData() {
-    this.api.newReleaseCategoryFetcher.fetchAllNewReleaseCategories().then(data => console.log(data));
+    return from( this.api.newReleaseCategoryFetcher.fetchAllNewReleaseCategories());
   }
   // specific track data by id
   fetchTrackMetaData() {
-    this.api.trackFetcher.setTrackID('KpnEGVHEsGgkoB0MBk').fetchMetadata().then(data => console.log(data));
+    return from( this.api.trackFetcher.setTrackID('KpnEGVHEsGgkoB0MBk').fetchMetadata());
   }
   // text to search
   searchResult() {
-    this.api.searchFetcher
+    return from( this.api.searchFetcher
       .setSearchCriteria('五月天 好好')
       //  .filter({artist: '五月天'})  track albums artist playlist availableTerritory(region) option use
-      .fetchSearchResult().then(data => console.log(data));
+      .fetchSearchResult());
   }
   // mood mode
   fetchAllMood() {
-    this.api.moodStationFetcher.fetchAllMoodStations().then(data => console.log(data));
+    return from( this.api.moodStationFetcher.fetchAllMoodStations());
   }
   // mood playlist
   fetchMoodMetaData() {
-    this.api.moodStationFetcher.setMoodStationID('StGZp2ToWq92diPHS7').fetchMetadata().then(data => console.log(data));
+    return from( this.api.moodStationFetcher.setMoodStationID('StGZp2ToWq92diPHS7').fetchMetadata());
   }
-
   // all type music
   fetchAllTypeClassify() {
-    this.api.genreStationFetcher.fetchAllGenreStations().then(data => console.log(data));
+    return from( this.api.genreStationFetcher.fetchAllGenreStations());
   }
   // specific type playlist data
   fetchClassifyMetaData() {
-    this.api.genreStationFetcher.setGenreStationID('TYq3EHFTl-1EOvJM5Y').fetchMetadata().then(data => console.log(data));
+    return from( this.api.genreStationFetcher.setGenreStationID('TYq3EHFTl-1EOvJM5Y').fetchMetadata());
   }
   // hot top for classsify
   fetchTopPlaylist() {
-    this.api.chartFetcher.fetchCharts().then(data => console.log(data));
+    return from( this.api.chartFetcher.fetchCharts());
   }
-
   fetchTopPlaylistData() {
-    this.api.chartFetcher.setPlaylistID('4mJSYXvueA8t0odsny').fetchTracks().then(data => console.log(data));
+    return from( this.api.chartFetcher.setPlaylistID('4mJSYXvueA8t0odsny').fetchTracks());
   }
-  test2() {
-    this.api.newReleaseCategoryFetcher.setCategoryID('Cng5IUIQhxb8w1cbsz').fetchMetadata().then(data => console.log(data));
-  }
-
-
-
 }

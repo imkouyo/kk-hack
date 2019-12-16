@@ -14,6 +14,7 @@ export class CommentPageComponent implements OnInit {
               private commentService: CommentService,
               private audioControlService: AudioControlService) { }
   ngOnInit() {
+    this.audioControlService.isDisable = false;
     this.commentService.comment.subscribe( (comment) => this.insert(comment));
   }
 
@@ -35,8 +36,9 @@ export class CommentPageComponent implements OnInit {
     return cmt;
   }
   videoReady(event) {
-    this.audioControlService.setReadyState(99);
+    console.log(event);
     this.audioControlService.player = event.target;
+    this.audioControlService.setReadyState(99);
   }
 
   videoState(event) {
