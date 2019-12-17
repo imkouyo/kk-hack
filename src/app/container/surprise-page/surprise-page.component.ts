@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild, ViewChildren} from '@angular/core';
 import {Sentence} from '../../Interface/Sentence';
 import { AudioControlService } from '../../service/audio-control.service';
+import { MatDialog } from '@angular/material';
+import { WhisperComponent } from '../../component/whisper/whisper.component';
 
 @Component({
   selector: 'app-surprise-page',
@@ -20,7 +22,7 @@ export class SurprisePageComponent implements OnInit {
   ];
   @ViewChild('board', { static: true}) board: ElementRef;
   @ViewChild('completeBoard', { static: true}) completeBoard: ElementRef;
-  constructor(private renderer: Renderer2, private audioControlService: AudioControlService) { }
+  constructor(private renderer: Renderer2, private audioControlService: AudioControlService, private popup: MatDialog) { }
 
   async ngOnInit() {
     this.audioControlService.isDisable = true;
@@ -68,6 +70,17 @@ export class SurprisePageComponent implements OnInit {
   }
   videoReady(event) {
     this.audioControlService.player = event.target;
+  }
+
+  createWhisper() {
+    const popupRef = this.popup.open(WhisperComponent, {
+      width: '480px',
+      position: {top: '158px'},
+      panelClass: 'whisperOverlay'
+    });
+    popupRef.afterClosed().subscribe(res => {
+      console.log('popup close');
+    });
   }
 
 }

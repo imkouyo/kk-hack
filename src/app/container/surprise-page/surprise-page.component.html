@@ -3,5 +3,6 @@
     <div class="typewriter-text">{{text}}</div>
     <div class="complete-text" [ngStyle]="{'display': isComplete? 'block': 'none'}" #completeBoard></div>
   </div>
+  <button (click)="createWhisper()">Create new Process</button>
 </div>
 <youtube-player style="display: none" videoId="S_E2EHVxNAE" (ready)="videoReady($event)"></youtube-player>
