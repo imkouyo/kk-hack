@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 99;
   .panel-group {
     max-width: 720px;
     width: 70%;

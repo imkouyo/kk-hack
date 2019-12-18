@@ -1,7 +1,10 @@
-<div class="container">
-  <img [attr.src]="imgSrc">
-  <div class="description">
-    <div class="title">{{title}}</div>
-    <div class="text">{{description}}</div>
+<div class="container" [ngClass]="{'even': topOrder%2 === 0}">
+  <div class="top-order">{{topOrder + 1 }}</div>
+  <div class="title">{{musicDetail.name}}</div>
+  <div class="artist">{{musicDetail.album.artist.name}}</div>
+  <div class="album">{{musicDetail.album.name}}</div>
+  <div class="text">
+    <div (mouseenter)="openImage()">Show Album Photo</div>
+    <img class="album-image" [ngClass]="{'active': isShowPhotoAlbum }" [attr.src]="musicDetail.album.images[1].url" alt="" (mouseleave)="closeImage()">
   </div>
 </div>

@@ -1,20 +1,22 @@
 <div class="container">
   <div class="header">
     <div class="title">Create Whisper</div>
-    <fa-icon [icon]="faTimes"  size="2x"></fa-icon>
+    <fa-icon [icon]="faTimes"  size="2x" (click)="closePopup()"></fa-icon>
   </div>
-  <form class="whisper-group">
-    <label for="recipient">Recipient</label>
-    <input type="text" id=recipient name="recipient">
-    <label for="song">Song</label>
-    <input type="text" id="song">
-    <label for="startTime">Start Time</label>
-    <input type="text" id="startTime">
-    <label for="sentence">What you want say</label>
-    <textarea name="" id="sentence" cols="30" rows="10"></textarea>
+  <form [formGroup]="whisperForm">
+    <div class="whisper-group">
+      <label for="recipient">Recipient</label>
+      <input type="text" id=recipient name="recipient" formControlName="name">
+      <label for="song">Song(Youtube Video ID)</label>
+      <input type="text" id="song" formControlName="song">
+      <label for="startTime">Start Time(default: 0 sec)</label>
+      <input type="text" id="startTime" formControlName="startTime">
+      <label for="sentence">What you want say</label>
+      <textarea name="" id="sentence" cols="30" rows="10" formControlName="sentence"></textarea>
+    </div>
+    <div class="btn-group">
+      <button class="cancel-btn" (click)="closePopup()">Cancel</button>
+      <button class="ok-btn" (click)="createWhisper(whisperForm.value)">Create</button>
+    </div>
   </form>
-  <div class="btn-group">
-    <button class="cancel-btn">Cancel</button>
-    <button class="ok-btn">Create</button>
-  </div>
 </div>
