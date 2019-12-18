@@ -1,6 +1,24 @@
 .container {
   height: 80px;
-  padding: 16px 24px;
+  padding: 16px 48px;
   width: 100%;
   box-sizing: border-box;
+  .search-panel {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    width: 360px;
+    height: 40px;
+    box-sizing: border-box;
+    background: white;
+    overflow: hidden;
+    & > * {
+      padding: 10px;
+    }
+    input {
+      width: 100%;
+      outline: none;
+      border: 0;
+    }
+  }
 }
