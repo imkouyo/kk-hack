@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .header {
+    height: 64px;
+    border-bottom: 1px #d8d8d8 solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 23px;
+    box-sizing: border-box;
+    .title {
+      font-size: 20px;
+      color: #333;
+      font-weight: 700;
+    }
+    fa-icon {
+      cursor: pointer;
+      svg {
+        path {
+          color: #333333;
+        }
+      }
+    }
+  }
+  .whisper-group {
+    padding: 20px 30px;
+    border-bottom: #d8d8d8 1px solid;
+    label {
+      display: block;
+      padding-top: 16px;
+      padding-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    label:first-child {
+      padding-top: 0;
+    }
+    input {
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+  .btn-group {
+    height: 66px;
+
+    padding: 17px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button {
+      width: 114px;
+      height: 34px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    button:focus {
+      outline: none;
+    }
+    .cancel-btn {
+      border: 1px #d8d8d8 solid;
+      border-radius: 5px;
+      color: #333333;
+      background-color: transparent;
+    }
+    .cancel-btn:hover {
+      background-color: #d8d8d8;
+    }
+    .ok-btn {
+      border-radius: 5px;
+      border: #4174bb ;
+      background-color: #4184c5;
+      color: white;
+      margin-left: 8px;
+    }
+    .ok-btn:hover {
+      background-color: #4174bb;
+    }
+  }
+}

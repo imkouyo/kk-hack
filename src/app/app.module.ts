@@ -13,12 +13,13 @@ import { MusicCardComponent } from './component/music-card/music-card.component'
 import { SurprisePageComponent } from './container/surprise-page/surprise-page.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material';
+import {MatDialogModule, MatSliderModule, MatTabsModule} from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MessageBoxComponent } from './component/message-box/message-box.component';
 import { CommentPageComponent } from './container/comment-page/comment-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { WhisperComponent } from './component/whisper/whisper.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MusicCardComponent,
     SurprisePageComponent,
     MessageBoxComponent,
-    CommentPageComponent
+    CommentPageComponent,
+    WhisperComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +44,13 @@ import { HttpClientModule } from '@angular/common/http';
     YouTubePlayerModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    MatDialogModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+    MatTabsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [WhisperComponent]
 })
 export class AppModule { }

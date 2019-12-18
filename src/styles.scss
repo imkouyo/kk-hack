@@ -1,8 +1,30 @@
+
 * {
   margin: 0;
   padding: 0;
-  color: #666;
+  color: snow;
   font-family: proxima-nova-soft, sans-serif;
   font-style: normal;
   font-weight: 100;
+}
+body { height: 100%; }
+html {
+  min-height: 100%;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.whisperOverlay {
+  mat-dialog-container {
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+}
+app-home-page {
+  mat-tab-group {
+    .mat-tab-label-content {
+      color: white;
+      font-size: 16px;
+    }
+  }
 }

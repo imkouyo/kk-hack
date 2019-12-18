@@ -1,7 +1,9 @@
+<button class="new-whisper" (click)="createWhisper()">Create new whisper</button>
 <div class="container">
   <div class="typewriter" #board>
     <div class="typewriter-text">{{text}}</div>
     <div class="complete-text" [ngStyle]="{'display': isComplete? 'block': 'none'}" #completeBoard></div>
   </div>
+
 </div>
-<youtube-player style="display: none" videoId="S_E2EHVxNAE" (ready)="videoReady($event)"></youtube-player>
+<youtube-player style="display: none" [videoId]="videoId" (ready)="videoReady($event)" (stateChange)="videoState($event)"></youtube-player>

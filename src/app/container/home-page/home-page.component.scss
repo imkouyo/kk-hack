@@ -7,24 +7,23 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding-right: 200px;
-    .group {
-      height: 100%;
-      padding: 0 32px;
-      display: flex;
-      flex-direction: column;
-      .title {
-        color: white;
-        font-size: 28px;
-      }
-      .card-group {
-        display: flex;
-        width: 100%;
-        app-music-card {
-          margin: 10px 8px;
-        }
-      }
+    .music-list-container {
+      padding-bottom: 30px;
     }
+    mat-tab-group::ng-deep{
+      color: white;
+    }
+    .grid-title{
+      display: grid;
+      grid-template-columns: 1fr 3fr 2fr 2fr 4fr;
+      .grid-item {
+        font-size: 16px;
+        color: white;
+        font-weight: 600;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+    };
   }
 }
 

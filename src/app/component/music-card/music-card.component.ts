@@ -6,13 +6,17 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./music-card.component.scss']
 })
 export class MusicCardComponent implements OnInit {
-  @Input() imgSrc;
-  @Input() description;
-  @Input() title;
-  @Input() playlistID;
+  @Input() musicDetail;
+  @Input() topOrder;
+  isShowPhotoAlbum = false;
   constructor() { }
-
   ngOnInit() {
+  }
+  closeImage() {
+    this.isShowPhotoAlbum = false;
+  }
+  openImage() {
+    this.isShowPhotoAlbum = true;
   }
 
 }
