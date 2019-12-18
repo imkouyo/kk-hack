@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {KkHackService} from '../../service/kk-hack.service';
 import {switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
+import { AudioControlService } from '../../service/audio-control.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +14,8 @@ export class HomePageComponent implements OnInit {
   newHitsPlaylist;
   topList = [];
   showList;
-  constructor(private kkHackService: KkHackService) { }
+  videoID = '7XlqcS6B7WA';
+  constructor(private kkHackService: KkHackService, private audioControlService: AudioControlService) { }
   ngOnInit() {
     this.kkHackService.isReady$.pipe(switchMap(status => {
       if (status) {
@@ -41,5 +43,17 @@ export class HomePageComponent implements OnInit {
         this.showList = res['data'].data;
         console.log(this.showList);
       });
+  }
+  videoReady(event) {
+    console.log(event.target, '123');
+    this.audioControlService.player = event.target;
+    this.audioControlService.setReadyState(99);
+  }
+  selectMusic(e) {
+    this.videoID = e.id;
+    this.audioControlService.setMusicOnPanel(e.detail);
+  }
+  videoState(event) {
+    this.audioControlService.audioState(event);
   }
 }

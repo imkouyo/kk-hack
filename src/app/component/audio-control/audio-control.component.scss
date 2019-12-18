@@ -3,7 +3,7 @@
   height: 90px;
   position: fixed;
   bottom: 0;
-  background-color: #282828;
+  background-color: #101010;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -125,6 +125,11 @@
     .thumbnail-imc {
       width: 56px;
       height: 56px;
+      padding: 10px;
+      img {
+        width: 56px;
+        height: 56px;
+      }
     }
     .thumbnail-description {
       display: flex;

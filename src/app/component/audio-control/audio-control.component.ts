@@ -25,7 +25,9 @@ export class AudioControlComponent implements OnInit {
   currentMin;
   currentSec;
   volume;
-  musicSong;
+  coverImage = '';
+  musicName = '';
+  artistName = '';
   constructor(public audioControlService: AudioControlService, private timeFormatService: TimeFormatService) { }
   ngOnInit() {
     this.audioControlService.currentDuration$.subscribe(time => {
@@ -38,7 +40,9 @@ export class AudioControlComponent implements OnInit {
       this.videoReady();
     });
     this.audioControlService.musicPanel$.subscribe(music => {
-      this.musicSong = music;
+      this.musicName = music.album.name;
+      this.artistName = music.album.artist.name;
+      this.coverImage = music.album.images[0].url;
     });
   }
 

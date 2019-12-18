@@ -13,7 +13,7 @@ import { MusicCardComponent } from './component/music-card/music-card.component'
 import { SurprisePageComponent } from './container/surprise-page/surprise-page.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDialogModule, MatSliderModule, MatTabsModule} from '@angular/material';
+import { MatDialogModule, MatExpansionModule, MatSliderModule, MatTabsModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MessageBoxComponent } from './component/message-box/message-box.component';
@@ -48,6 +48,7 @@ import { WhisperComponent } from './component/whisper/whisper.component';
     FontAwesomeModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KkHackService } from './service/kk-hack.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { KkHackService } from './service/kk-hack.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private kk: KkHackService) {
+  constructor(private kk: KkHackService,) {
   }
 
   ngOnInit(): void {

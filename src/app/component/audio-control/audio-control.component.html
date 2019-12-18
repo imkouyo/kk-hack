@@ -1,11 +1,11 @@
 <div class="container">
   <div class="thumbnail-group">
-    <div class="thumbnail-imc"></div>
+    <div class="thumbnail-imc">
+      <img [attr.src]="coverImage" alt="">
+    </div>
     <div class="thumbnail-description">
-      <div class="thumbnail-title">123</div>
-      <div class="thumbnail-text">234</div>
-<!--      <div class="thumbnail-title">{{musicSong.album.name }}</div>-->
-<!--      <div class="thumbnail-text">{{musicSong.album.artist.name }}</div>-->
+      <div class="thumbnail-title">{{musicName}}</div>
+      <div class="thumbnail-text">{{ artistName}}</div>
     </div>
   </div>
   <div class="panel-group">
@@ -27,4 +27,3 @@
     <mat-slider [min] = 0 [max] = 100 [value]="volume" [step]="1" (change)="slideVolume($event)"></mat-slider>
   </div>
 </div>
-

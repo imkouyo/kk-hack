@@ -1,10 +1,18 @@
-<div class="container" [ngClass]="{'even': topOrder%2 === 0}">
+<div class="container" (click)="clickMusic(musicDetail.name)" [ngClass]="{'even': topOrder%2 === 0}">
+  <div class="text">
+    <img class="little-cover" [attr.src]="musicDetail.album.images[0].url" alt="">
+  </div>
   <div class="top-order">{{topOrder + 1 }}</div>
   <div class="title">{{musicDetail.name}}</div>
   <div class="artist">{{musicDetail.album.artist.name}}</div>
   <div class="album">{{musicDetail.album.name}}</div>
-  <div class="text">
-    <div (mouseenter)="openImage()">Show Album Photo</div>
-    <img class="album-image" [ngClass]="{'active': isShowPhotoAlbum }" [attr.src]="musicDetail.album.images[1].url" alt="" (mouseleave)="closeImage()">
+</div>
+<div class="search-container" *ngIf="this.searchResult && isShowPhotoAlbum" >
+  <div class="search-item" *ngFor="let item of searchResult.items"  (click)="selectMusic(item['id']['videoId'])">
+    <img [src]=" item['snippet']['thumbnails']['default']['url']"  alt="">
+    <div class="title" >{{item['snippet']['title']}}</div>
   </div>
 </div>
+<!--// res.items[].id.videoId-->
+<!--// res.items[].snipet.thumbnails.default.url-->
+<!--// res.items.title-->

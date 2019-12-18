@@ -43,6 +43,7 @@ export class AudioControlService {
     return 0;
   }
   play() {
+    // console.log(this.player);
     this.player.playVideo();
   }
   pause() {
