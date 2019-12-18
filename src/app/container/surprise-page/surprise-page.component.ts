@@ -95,7 +95,7 @@ export class SurprisePageComponent implements OnInit {
   createWhisper() {
     const popupRef = this.popup.open(WhisperComponent, {
       width: '480px',
-      position: {top: '158px'},
+      position: {},
       panelClass: 'whisperOverlay'
     });
     popupRef.afterClosed().subscribe(res => {

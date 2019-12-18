@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AudioControlService } from '../../service/audio-control.service';
 
 @Component({
   selector: 'app-music-card',
@@ -9,7 +10,7 @@ export class MusicCardComponent implements OnInit {
   @Input() musicDetail;
   @Input() topOrder;
   isShowPhotoAlbum = false;
-  constructor() { }
+  constructor(private audioControlService: AudioControlService) { }
   ngOnInit() {
   }
   closeImage() {
@@ -18,5 +19,7 @@ export class MusicCardComponent implements OnInit {
   openImage() {
     this.isShowPhotoAlbum = true;
   }
-
+  clickMusic() {
+    this.audioControlService.setMusicOnPanel(this.musicDetail);
+  }
 }

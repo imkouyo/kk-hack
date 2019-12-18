@@ -15,6 +15,8 @@ export class AudioControlService {
   // tslint:disable-next-line:variable-name
   private _currentDuration;
   private audioInterval;
+  private musicPanel = new Subject<any>();
+  public  musicPanel$ = this.musicPanel.asObservable();
   private isPlaying = new BehaviorSubject<boolean>(false);
   public isPlaying$ = this.isPlaying.asObservable();
   private currentDuration = new BehaviorSubject<number>(0);
@@ -99,5 +101,8 @@ export class AudioControlService {
     }
   setReadyState(state) {
     this.ready.next(state);
+  }
+  setMusicOnPanel(music) {
+    this.musicPanel.next(music);
   }
 }

@@ -7,7 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  faSearch = faSearch
+  faSearch = faSearch;
   constructor() { }
 
   ngOnInit() {

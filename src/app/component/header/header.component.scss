@@ -12,6 +12,13 @@
     box-sizing: border-box;
     background: white;
     overflow: hidden;
+    fa-icon::ng-deep{
+      svg{
+        path {
+          color: #333;
+        }
+      }
+    }
     & > * {
       padding: 10px;
     }

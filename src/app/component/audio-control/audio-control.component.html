@@ -2,15 +2,19 @@
   <div class="thumbnail-group">
     <div class="thumbnail-imc"></div>
     <div class="thumbnail-description">
-      <div class="thumbnail-title">Owen</div>
-      <div class="thumbnail-text">Sing the song</div>
+      <div class="thumbnail-title">123</div>
+      <div class="thumbnail-text">234</div>
+<!--      <div class="thumbnail-title">{{musicSong.album.name }}</div>-->
+<!--      <div class="thumbnail-text">{{musicSong.album.artist.name }}</div>-->
     </div>
   </div>
   <div class="panel-group">
     <div class="music-panel">
+      <fa-icon [icon]="faBackward"></fa-icon>
       <fa-icon *ngIf="!(this.audioControlService.isPlaying$ | async)" [icon]="faPlay" (click)="play()"></fa-icon>
       <fa-icon *ngIf="(this.audioControlService.isPlaying$ | async)" [icon]="faPause" (click)="pause()"></fa-icon>
       <fa-icon [icon]="faStop" (click)="stop()"></fa-icon>
+      <fa-icon [icon]="faForward"></fa-icon>
     </div>
     <div class="time-panel">
       <div class="current-time">{{currentMin}}:{{currentSec}}</div>

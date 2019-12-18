@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faPause, faPlay, faStop, faVolumeUp} from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faForward, faPause, faPlay, faStop, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { AudioControlService } from '../../service/audio-control.service';
 import { TimeFormatService } from '../../service/time-format.service';
 
@@ -8,11 +8,14 @@ import { TimeFormatService } from '../../service/time-format.service';
   templateUrl: './audio-control.component.html',
   styleUrls: ['./audio-control.component.scss']
 })
+
 export class AudioControlComponent implements OnInit {
 
   faPause = faPause;
   faPlay = faPlay;
   faStop = faStop;
+  faForward = faForward;
+  faBackward = faBackward;
   faVolumeUp = faVolumeUp;
 
   currentDuration: number;
@@ -22,6 +25,7 @@ export class AudioControlComponent implements OnInit {
   currentMin;
   currentSec;
   volume;
+  musicSong;
   constructor(public audioControlService: AudioControlService, private timeFormatService: TimeFormatService) { }
   ngOnInit() {
     this.audioControlService.currentDuration$.subscribe(time => {
@@ -31,8 +35,10 @@ export class AudioControlComponent implements OnInit {
       this.currentMin = this.timeFormatService.secToMin(time);
     });
     this.audioControlService.ready$.subscribe(state => {
-      console.log(state);
       this.videoReady();
+    });
+    this.audioControlService.musicPanel$.subscribe(music => {
+      this.musicSong = music;
     });
   }
 
