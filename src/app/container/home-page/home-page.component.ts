@@ -39,6 +39,9 @@ export class HomePageComponent implements OnInit {
         this.showList = res.data.data;
       }
     });
+    this.audioControlService.ready$.subscribe(state => {
+
+    })
   }
   getTopList(event) {
     this.spinner.show();

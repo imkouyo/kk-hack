@@ -28,6 +28,7 @@ export class AudioControlComponent implements OnInit {
   coverImage = '';
   musicName = '';
   artistName = '';
+  videoId = 'S_E2EHVxNAE';
   constructor(public audioControlService: AudioControlService, private timeFormatService: TimeFormatService) { }
   ngOnInit() {
     this.audioControlService.currentDuration$.subscribe(time => {
@@ -78,5 +79,11 @@ export class AudioControlComponent implements OnInit {
     if (!this.audioControlService.isDisable) {
       this.audioControlService.stop();
     }
+  }
+  initVideo(event) {
+    this.audioControlService.player = event.target;
+  }
+  handleVideo(event) {
+    this.audioControlService.setReadyState(event.data);
   }
 }

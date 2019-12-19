@@ -27,3 +27,4 @@
     <mat-slider [min] = 0 [max] = 100 [value]="volume" [step]="1" (change)="slideVolume($event)"></mat-slider>
   </div>
 </div>
+<youtube-player style="display: none" [videoId]="videoId" (ready)="initVideo($event)" (stateChange)="handleVideo($event)"></youtube-player>
