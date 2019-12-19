@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {KkHackService} from '../../service/kk-hack.service';
-import {switchMap, tap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import { KkHackService } from '../../service/kk-hack.service';
+import { switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { AudioControlService } from '../../service/audio-control.service';
+import { NgxSpinnerService}  from 'ngx-spinner';
 
 @Component({
   selector: 'app-home-page',
@@ -15,7 +16,9 @@ export class HomePageComponent implements OnInit {
   topList = [];
   showList;
   videoID = '7XlqcS6B7WA';
-  constructor(private kkHackService: KkHackService, private audioControlService: AudioControlService) { }
+  constructor(private kkHackService: KkHackService,
+              private audioControlService: AudioControlService,
+              private spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.kkHackService.isReady$.pipe(switchMap(status => {
       if (status) {
@@ -38,10 +41,11 @@ export class HomePageComponent implements OnInit {
     });
   }
   getTopList(event) {
+    this.spinner.show();
     this.kkHackService.fetchTopPlaylistData(this.topList[event.index].id).subscribe(
       res => {
         this.showList = res['data'].data;
-        console.log(this.showList);
+        this.spinner.hide();
       });
   }
   videoReady(event) {

@@ -20,6 +20,7 @@ import { MessageBoxComponent } from './component/message-box/message-box.compone
 import { CommentPageComponent } from './container/comment-page/comment-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WhisperComponent } from './component/whisper/whisper.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { WhisperComponent } from './component/whisper/whisper.component';
     ReactiveFormsModule,
     MatTabsModule,
     MatExpansionModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
