@@ -38,7 +38,9 @@ export class AudioControlComponent implements OnInit {
       this.currentMin = this.timeFormatService.secToMin(time);
     });
     this.audioControlService.ready$.subscribe(state => {
+      console.log(state);
       this.videoReady();
+      this.audioControlService.audioState(state);
     });
     this.audioControlService.musicPanel$.subscribe(music => {
       this.musicName = music.album.name;
@@ -82,8 +84,9 @@ export class AudioControlComponent implements OnInit {
   }
   initVideo(event) {
     this.audioControlService.player = event.target;
+    this.audioControlService.setReadyState(99);
   }
   handleVideo(event) {
-    this.audioControlService.setReadyState(event.data);
+    this.audioControlService.setReadyState(event);
   }
 }

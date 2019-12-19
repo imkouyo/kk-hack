@@ -81,7 +81,6 @@ export class AudioControlService {
     this.player.seekTo(sec);
   }
   audioState(state) {
-    console.log('service', state.data);
     if (state.data === -1) {
       this.setReadyState(-1);
     } else if (state.data === 0) {

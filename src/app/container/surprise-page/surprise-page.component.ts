@@ -27,9 +27,14 @@ export class SurprisePageComponent implements OnInit {
   constructor(private renderer: Renderer2, private audioControlService: AudioControlService, private popup: MatDialog) { }
 
    ngOnInit() {
-    this.talkStory({data: this.story , song: this.videoId, startTime: 70 }).then();
     this.audioControlService.isDisable = true;
+    if (!!this.audioControlService.player) {
+      this.talkStory({data: this.story , song: this.videoId, startTime: 70 }).then();
+    }
     this.audioControlService.ready$.subscribe(status => {
+      if (status === 99 ) {
+        this.talkStory({data: this.story , song: this.videoId, startTime: 70 }).then();
+      }
       console.log(status, 'status');
       if (status === 0) {
         this.resetCompleteBoard();
@@ -41,9 +46,9 @@ export class SurprisePageComponent implements OnInit {
     });
   }
   async talkStory(story) {
-    this.videoId = story.song;
+    this.audioControlService.player.cueVideoById(story.song)
     for await ( const i of story.data) {
-      await this.timeout(8000);
+      await this.timeout(1000);
       this.talk(i, parseInt(story.startTime, 10), story);
     }
   }

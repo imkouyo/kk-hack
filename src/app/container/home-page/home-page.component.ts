@@ -51,16 +51,5 @@ export class HomePageComponent implements OnInit {
         this.spinner.hide();
       });
   }
-  videoReady(event) {
-    console.log(event.target, '123');
-    this.audioControlService.player = event.target;
-    this.audioControlService.setReadyState(99);
-  }
-  selectMusic(e) {
-    this.videoID = e.id;
-    this.audioControlService.setMusicOnPanel(e.detail);
-  }
-  videoState(event) {
-    this.audioControlService.audioState(event);
-  }
+
 }
