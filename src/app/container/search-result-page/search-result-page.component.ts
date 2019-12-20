@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchService} from '../../service/search.service';
 import {KkHackService} from '../../service/kk-hack.service';
-import {switchMap} from 'rxjs/operators';
+import {map, switchMap, withLatestFrom} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-result-page',
@@ -13,7 +13,9 @@ export class SearchResultPageComponent implements OnInit {
   constructor( private searchService: SearchService, private kkHackService: KkHackService) { }
   targetID;
   ngOnInit() {
-    // this.searchService.handleCategory$.pipe;
+    this.searchService.handleCategory$.pipe(withLatestFrom(this.kkHackService.isReady$), map((first, second) => {
+      console.log(first, second);
+    }));
   }
 
 
