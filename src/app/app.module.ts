@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { WhisperComponent } from './component/whisper/whisper.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { CategoryCardComponent } from './component/category-card/category-card.component';
+import { SearchResultPageComponent } from './container/search-result-page/search-result-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CategoryCardComponent } from './component/category-card/category-card.c
     MessageBoxComponent,
     CommentPageComponent,
     WhisperComponent,
-    CategoryCardComponent
+    CategoryCardComponent,
+    SearchResultPageComponent
   ],
   imports: [
     BrowserModule,

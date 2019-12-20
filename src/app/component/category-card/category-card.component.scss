@@ -20,8 +20,8 @@
     left: 0;
     right: 0;
     background: black;
-    opacity: .6;
-    transition: opacity 1s ease-in-out;
+    opacity: .4;
+    transition: opacity .5s ease-in-out;
     border-radius: 10px;
     &:hover {
       opacity: 0;

@@ -4,11 +4,13 @@ import { HomePageComponent } from './container/home-page/home-page.component';
 import { SearchPageComponent } from './container/search-page/search-page.component';
 import { SurprisePageComponent } from './container/surprise-page/surprise-page.component';
 import { CommentPageComponent } from './container/comment-page/comment-page.component';
+import {SearchResultPageComponent} from './container/search-result-page/search-result-page.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'search', component: SearchPageComponent},
+  { path: 'search/:type', component: SearchResultPageComponent },
   { path: 'surprise', component: SurprisePageComponent },
   { path: 'comment-video', component: CommentPageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
