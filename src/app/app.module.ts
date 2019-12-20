@@ -21,6 +21,7 @@ import { CommentPageComponent } from './container/comment-page/comment-page.comp
 import { HttpClientModule } from '@angular/common/http';
 import { WhisperComponent } from './component/whisper/whisper.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import { CategoryCardComponent } from './component/category-card/category-card.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     SurprisePageComponent,
     MessageBoxComponent,
     CommentPageComponent,
-    WhisperComponent
+    WhisperComponent,
+    CategoryCardComponent
   ],
   imports: [
     BrowserModule,

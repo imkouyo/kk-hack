@@ -3,6 +3,11 @@
   padding: 16px 48px;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  & > * {
+    padding: 15px;
+  }
   .search-panel {
     display: flex;
     align-items: center;

@@ -1,0 +1,55 @@
+.container {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  .name {
+    position: absolute;
+    bottom: -28px;
+    font-size: 20px;
+  }
+  .shadow-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    opacity: .6;
+    transition: opacity 1s ease-in-out;
+    border-radius: 10px;
+    &:hover {
+      opacity: 0;
+    }
+  }
+  &[bgColor="pink"]{
+    background-color: #F17A72;
+  }
+  &[bgColor="gblue"] {
+    background-color: #78BCAF;
+  }
+  &[bgColor="gbluedark"] {
+    background-color: #31647F;
+  }
+  &[bgColor="blue"] {
+    background-color: #56B1DE;
+  }
+  &[bgColor="purple"] {
+    background-color: #455EA0;
+  }
+  &[bgColor="red"] {
+    background-color: #E05E66;
+  }
+  &[bgColor="yellow"] {
+    background-color: #ECC34F;
+  }
+  &[bgColor="orange"] {
+    background-color: #E35E01;
+  }
+}
+
