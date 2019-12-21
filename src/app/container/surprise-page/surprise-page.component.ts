@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild, ViewChildren} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import {Sentence} from '../../Interface/Sentence';
 import { AudioControlService } from '../../service/audio-control.service';
 import { MatDialog } from '@angular/material';
@@ -9,7 +9,7 @@ import { WhisperComponent } from '../../component/whisper/whisper.component';
   templateUrl: './surprise-page.component.html',
   styleUrls: ['./surprise-page.component.scss']
 })
-export class SurprisePageComponent implements OnInit {
+export class SurprisePageComponent implements OnInit, OnDestroy{
   text: string;
   isComplete = false;
   videoId = 'S_E2EHVxNAE';
@@ -125,6 +125,9 @@ export class SurprisePageComponent implements OnInit {
     for (const child of ch) {
       this.renderer.removeChild(this.completeBoard.nativeElement, child);
     }
+  }
+  ngOnDestroy(): void {
+    this.audioControlService.stop();
   }
 }
 

@@ -18,8 +18,47 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow: hidden;
     padding: 0;
   }
-
 }
+.kk-auth-dialog {
+  mat-dialog-container {
+    width: 340px;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 0;
+    .container {
+      .header {
+        color: #282828;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 36px 30px 26px 30px;
+      }
+      .content {
+        color: #282828;
+        padding: 0 30px 45px 30px;
+        border-bottom: #d8d8d8 1px solid;
+      }
+      .footer {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        button{
+          height: 100%;
+          color: #3986d3;
+          width: 50%;
+          border: 0;
+          font-size: 20px;
+          font-weight: bold;
+          background: white;
+          &:first-child {
+            border-right: 1px #d8d8d8 solid;
+          }
+        }
+
+      }
+    }
+  }
+}
+
 app-home-page {
   mat-tab-group {
     .mat-tab-label-content {

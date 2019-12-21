@@ -15,12 +15,11 @@ export class CategoryCardComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
   ngOnChanges(): void {
-    console.log(this.data);
   }
   selectMood() {
     let r = '';
     this.data.name.split(' ').forEach(text => r = r.concat(text));
-    this.router.navigate(['/search', r]);
+    this.router.navigate(['/search', r], {queryParams: {id: this.data.id}});
 
   }
 

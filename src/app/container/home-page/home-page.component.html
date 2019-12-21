@@ -1,10 +1,4 @@
 <div class="container">
-<!--  <youtube-player-->
-<!--    [videoId]="videoID"-->
-<!--    (ready)="videoReady($event)"-->
-<!--    (stateChange)="videoState($event)"-->
-<!--     style="display: none">-->
-<!--  </youtube-player>-->
   <app-header></app-header>
   <mat-tab-group (focusChange)="getTopList($event)">
     <mat-tab label="Comprehensive" >
@@ -38,6 +32,8 @@
        let i = index"
       [musicDetail]="item"
       [topOrder] ="i"
+      (currentIndex)="playingIndex($event)"
+      [ngClass]="{'active': i === currentPlayingIndex}"
     ></app-music-card>
   </div>
   <ngx-spinner

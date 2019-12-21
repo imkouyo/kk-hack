@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, Renderer2 } from '@angular/core';
-import { faVideo } from '@fortawesome/free-solid-svg-icons';
+import { faList, faVideo } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-slide-bar',
@@ -8,6 +8,7 @@ import { faVideo } from '@fortawesome/free-solid-svg-icons';
 })
 export class SlideBarComponent implements OnInit, AfterViewInit{
   faVideo = faVideo;
+  faList = faList;
   constructor(private renderer: Renderer2) { }
   @ViewChildren('item') components: QueryList<ElementRef>;
   ngOnInit() {

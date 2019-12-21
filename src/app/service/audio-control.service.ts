@@ -23,6 +23,8 @@ export class AudioControlService {
   public currentDuration$ = this.currentDuration.asObservable();
   private ready = new Subject<number>();
   public ready$ = this.ready.asObservable();
+  private handleNext = new Subject<number>();
+  public handleNext$ = this.handleNext.asObservable();
   constructor(private timeFormatService: TimeFormatService) { }
   set isDisable(state) {
     this._isDisable = state;
@@ -82,19 +84,27 @@ export class AudioControlService {
   }
   audioState(state) {
     if (state.data === -1) {
+      // un started
       this.setReadyState(-1);
     } else if (state.data === 0) {
+      // end
       this.stop();
+      this.handleNext.next(1);
+      this.setReadyState(0);
     } else if (state.data === 1 ) {
+      // playing
       this.audioStart();
       this.setReadyState(1);
     } else if (state.data === 2) {
+      // paused
       this.audioPause();
       this.setReadyState(2);
     } else if (state.data === 3) {
+      // buffering
       this.isPlaying.next(false);
       this.setReadyState(3);
     } else if (state.data === 5) {
+      // video cued
       this.audioStop();
       this.setReadyState(5);
       }

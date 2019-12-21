@@ -7,7 +7,6 @@ import { SlideBarComponent } from './component/slide-bar/slide-bar.component';
 import { AudioControlComponent } from './component/audio-control/audio-control.component';
 import { HomePageComponent } from './container/home-page/home-page.component';
 import { SearchPageComponent } from './container/search-page/search-page.component';
-import { LibaryPageComponent } from './container/libary-page/libary-page.component';
 import { HeaderComponent } from './component/header/header.component';
 import { MusicCardComponent } from './component/music-card/music-card.component';
 import { SurprisePageComponent } from './container/surprise-page/surprise-page.component';
@@ -22,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { WhisperComponent } from './component/whisper/whisper.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { CategoryCardComponent } from './component/category-card/category-card.component';
-import { SearchResultPageComponent } from './container/search-result-page/search-result-page.component';
+import { LibraryPageComponent } from './container/library-page/library-page.component';
+import { KkOauthComponent } from './component/kk-oauth/kk-oauth.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { SearchResultPageComponent } from './container/search-result-page/search
     AudioControlComponent,
     HomePageComponent,
     SearchPageComponent,
-    LibaryPageComponent,
     HeaderComponent,
     MusicCardComponent,
     SurprisePageComponent,
@@ -39,7 +38,8 @@ import { SearchResultPageComponent } from './container/search-result-page/search
     CommentPageComponent,
     WhisperComponent,
     CategoryCardComponent,
-    SearchResultPageComponent
+    LibraryPageComponent,
+    KkOauthComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +58,6 @@ import { SearchResultPageComponent } from './container/search-result-page/search
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [WhisperComponent]
+  entryComponents: [WhisperComponent, KkOauthComponent]
 })
 export class AppModule { }

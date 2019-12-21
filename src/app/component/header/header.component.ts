@@ -15,5 +15,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+  goBack() {
+    window.history.back();
+  }
+
+  goForward() {
+    window.history.forward();
+  }
 
 }

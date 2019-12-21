@@ -66,8 +66,8 @@ export class KkHackService {
     return from( this.api.moodStationFetcher.fetchAllMoodStations());
   }
   // mood playlist
-  fetchMoodMetaData() {
-    return from( this.api.moodStationFetcher.setMoodStationID('StGZp2ToWq92diPHS7').fetchMetadata());
+  fetchMoodMetaData(id) {
+    return from( this.api.moodStationFetcher.setMoodStationID(id).fetchMetadata());
   }
   // all type music
   fetchAllTypeClassify() {

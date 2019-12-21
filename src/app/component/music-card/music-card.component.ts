@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AudioControlService } from '../../service/audio-control.service';
 import { YoutubeService } from '../../service/youtube.service';
 import { HttpParameterCodec } from '@angular/common/http';
@@ -20,9 +20,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class MusicCardComponent implements OnInit, HttpParameterCodec {
+export class MusicCardComponent implements OnInit {
   @Input() musicDetail;
   @Input() topOrder;
+  @Output() currentIndex = new EventEmitter<number>();
   isShowPhotoAlbum = false;
   searchResult: any;
   constructor(private audioControlService: AudioControlService, private youtubeService: YoutubeService) { }
@@ -30,7 +31,7 @@ export class MusicCardComponent implements OnInit, HttpParameterCodec {
   }
   clickMusic(event) {
     if (!this.isShowPhotoAlbum && !this.searchResult) {
-      const encodeTarget = this.encodeValue(event);
+      const encodeTarget = this.youtubeService.encodeValue(event);
       this.youtubeService.searchMusic(encodeTarget, 3).subscribe(
         res => {
           this.searchResult = res;
@@ -45,17 +46,6 @@ export class MusicCardComponent implements OnInit, HttpParameterCodec {
   selectMusic(id) {
     this.audioControlService.player.cueVideoById(id);
     this.audioControlService.setMusicOnPanel(this.musicDetail);
-  }
-  encodeKey(key: string): string {
-    return encodeURIComponent(key);
-  }
-  encodeValue(value: string): string {
-    return encodeURIComponent(value);
-  }
-  decodeKey(key: string): string {
-    return decodeURIComponent(key);
-  }
-  decodeValue(value: string): string {
-    return decodeURIComponent(value);
+    this.currentIndex.emit(this.topOrder);
   }
 }

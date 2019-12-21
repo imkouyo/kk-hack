@@ -22,7 +22,6 @@ export class SearchPageComponent implements OnInit {
     )).subscribe(res => {
       if (res) {
         this.moodList = res.data.data;
-        console.log(res.data);
       }
     });
   }
