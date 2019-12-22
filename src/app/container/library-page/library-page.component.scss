@@ -1,0 +1,51 @@
+:host {
+  width: 100%;
+  .container {
+    width: 100%;
+    height: 100%;
+    .content {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 30px;
+      .item {
+        cursor: pointer;
+        width: 240px;
+        height: 240px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 120px;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .item-name {
+          margin-top: 16px;
+        }
+        &[bgColor="gbluedark"] {
+          background-color: #31647F;
+        }
+        &[bgColor="blue"] {
+          background-color: #56B1DE;
+        }
+        &[bgColor="purple"] {
+          background-color: #455EA0;
+        }
+        .shadow-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: #282828;
+          opacity: .4;
+          transition: opacity .5s ease-in-out;
+          border-radius: 120px;
+        }
+        .shadow-overlay:hover {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+

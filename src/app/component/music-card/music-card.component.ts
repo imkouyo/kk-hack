@@ -29,9 +29,9 @@ export class MusicCardComponent implements OnInit {
   constructor(private audioControlService: AudioControlService, private youtubeService: YoutubeService) { }
   ngOnInit() {
   }
-  clickMusic(event) {
+  clickMusic() {
     if (!this.isShowPhotoAlbum && !this.searchResult) {
-      const encodeTarget = this.youtubeService.encodeValue(event);
+      const encodeTarget = this.youtubeService.encodeValue(`${this.musicDetail.name} ${this.musicDetail.album.artist.name}`);
       this.youtubeService.searchMusic(encodeTarget, 3).subscribe(
         res => {
           this.searchResult = res;

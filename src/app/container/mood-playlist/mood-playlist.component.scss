@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+  height: 100%;
+  .container {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    .music-list-container {
+      padding-bottom: 30px;
+    }
+    mat-tab-group::ng-deep{
+      color: white;
+    }
+    .grid-title{
+      display: grid;
+      grid-template-columns: 1fr 1fr 4fr 2fr 2fr;
+      background-color: #282828;
+      border-bottom: #666 1px solid;
+      .grid-item {
+        font-size: 16px;
+        color: white;
+        font-weight: 600;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+    };
+  }
+}

@@ -23,6 +23,10 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { CategoryCardComponent } from './component/category-card/category-card.component';
 import { LibraryPageComponent } from './container/library-page/library-page.component';
 import { KkOauthComponent } from './component/kk-oauth/kk-oauth.component';
+import { MoodPlaylistComponent } from './container/mood-playlist/mood-playlist.component';
+import { UserInfoComponent } from './container/user-info/user-info.component';
+import { DailyRecommendComponent } from './container/daily-recommend/daily-recommend.component';
+import { UserPlaylistComponent } from './container/user-playlist/user-playlist.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { KkOauthComponent } from './component/kk-oauth/kk-oauth.component';
     WhisperComponent,
     CategoryCardComponent,
     LibraryPageComponent,
-    KkOauthComponent
+    KkOauthComponent,
+    MoodPlaylistComponent,
+    UserInfoComponent,
+    DailyRecommendComponent,
+    UserPlaylistComponent
   ],
   imports: [
     BrowserModule,

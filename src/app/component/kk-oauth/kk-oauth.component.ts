@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YoutubeService } from '../../service/youtube.service';
+import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-kk-oauth',
@@ -8,7 +10,7 @@ import { YoutubeService } from '../../service/youtube.service';
 })
 export class KkOauthComponent implements OnInit {
 
-  constructor(private youtubeService: YoutubeService) { }
+  constructor(private youtubeService: YoutubeService, private router: Router, public popupRef: MatDialogRef<KkOauthComponent>) { }
 
   ngOnInit() {
   }
@@ -16,5 +18,9 @@ export class KkOauthComponent implements OnInit {
     const locationURL = this.youtubeService.encodeValue('http://localhost:4200/#/kk-auth');
     const URL = 'https://account.kkbox.com/oauth2/authorize';
     window.location.href = `${URL}?redirect_uri=${locationURL}&client_id=eda1f36a346105672789cb2ba8187ff5&response_type=code&state=1234`;
+  }
+  logout() {
+    this.router.navigate(['/home']).then(() => this.popupRef.close()
+    );
   }
 }

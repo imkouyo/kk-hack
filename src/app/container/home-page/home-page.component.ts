@@ -44,8 +44,8 @@ export class HomePageComponent implements OnInit {
     pipe(switchMap( state => {
       console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
-        console.log(this.showList[this.currentPlayingIndex + 1].name, 'search');
-        const encodeTarget = this.youtubeService.encodeValue(this.showList[this.currentPlayingIndex + 1].name);
+        const encodeTarget = this.youtubeService
+          .encodeValue(`${this.showList[this.currentPlayingIndex + 1].name} ${this.showList[this.currentPlayingIndex + 1].album.artist.name}`);
         return this.youtubeService.searchMusic(encodeTarget, 1);
       } else {
         return of(null);
