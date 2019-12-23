@@ -1,9 +1,0 @@
-<app-header></app-header>
-<button class="new-whisper" (click)="createWhisper()">Create new whisper</button>
-<div class="container">
-  <div class="typewriter" #board>
-    <div class="typewriter-text">{{text}}</div>
-    <div class="complete-text" [ngStyle]="{'display': isComplete? 'block': 'none'}" #completeBoard></div>
-  </div>
-</div>
-

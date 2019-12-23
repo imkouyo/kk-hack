@@ -9,7 +9,6 @@ import { HomePageComponent } from './container/home-page/home-page.component';
 import { SearchPageComponent } from './container/search-page/search-page.component';
 import { HeaderComponent } from './component/header/header.component';
 import { MusicCardComponent } from './component/music-card/music-card.component';
-import { SurprisePageComponent } from './container/surprise-page/surprise-page.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatExpansionModule, MatSliderModule, MatTabsModule } from '@angular/material';
@@ -29,7 +28,8 @@ import { DailyRecommendComponent } from './container/daily-recommend/daily-recom
 import { UserPlaylistComponent } from './container/user-playlist/user-playlist.component';
 import { PlaylistCardComponent } from './component/playlist-card/playlist-card.component';
 import { UserPlaylistResultComponent } from './container/user-playlist-result/user-playlist-result.component';
-
+import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +39,6 @@ import { UserPlaylistResultComponent } from './container/user-playlist-result/us
     SearchPageComponent,
     HeaderComponent,
     MusicCardComponent,
-    SurprisePageComponent,
     MessageBoxComponent,
     CommentPageComponent,
     WhisperComponent,
@@ -66,7 +65,8 @@ import { UserPlaylistResultComponent } from './container/user-playlist-result/us
     ReactiveFormsModule,
     MatTabsModule,
     MatExpansionModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent],

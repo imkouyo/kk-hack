@@ -32,12 +32,15 @@ export class LibraryPageComponent implements OnInit {
     this.router.queryParams.pipe(switchMap(value => {
       this.kkHttpClientService.setUserCode(value.code || '');
       if (value.code) {
+        console.log(value.code, 'value');
+        // this.kkHttpClientService.setUserCode(value.code);
         return this.kkHttpClientService.accessToken(value.code);
       } else {
         return of(null);
       }
     }), switchMap(res => {
       if (res) {
+        console.log('here');
         if (JSON.parse(res.body).error) {
           this.route.navigate(['/kk-auth']).then();
           return of(null);

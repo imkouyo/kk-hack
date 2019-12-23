@@ -1,9 +1,12 @@
 <app-header></app-header>
 <div class="container">
   <div class="comment-container">
-    <youtube-player videoId="GkY9dFAECt8" (ready)="videoReady($event)" (stateChange)="videoState($event)" [height]="600" [width]="800"></youtube-player>
+    <div class="typewriter" #board>
+      <div class="typewriter-text">{{text}}</div>
+      <div class="complete-text" [ngStyle]="{'display': isComplete? 'block': 'none'}" #completeBoard></div>
+    </div>
     <div class="comment-overlay" #commentBoard></div>
   </div>
   <app-message-box ></app-message-box>
 </div>
-
+<button class="new-whisper" (click)="createWhisper()">Create new whisper</button>

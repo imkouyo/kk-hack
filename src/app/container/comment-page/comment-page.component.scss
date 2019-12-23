@@ -1,13 +1,30 @@
 :host{
   width: 100%;
   height: 100%;
+  .new-whisper {
+    width: 160px;
+    height: 40px;
+    background-color: #4184c5;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    border: 0;
+    margin: 24px;
+    cursor: pointer;
+    &:hover {
+      background-color: #4174bb;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
   .container {
     display: flex;
     width: 100%;
     max-width: 1380px;
     height: 600px;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
     box-sizing: border-box;
     .comment-container {
       position: relative;
@@ -15,7 +32,42 @@
       height: 600px;
       overflow: hidden;
       box-sizing: border-box;
-      margin-right: 20px;
+
+      .typewriter {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-family: Courier, monospace;
+        overflow: hidden;
+        display: flex;
+        line-height: 45px;
+        background: black;
+        .typewriter-text {
+          position: absolute;
+          top: 100px;
+          margin-left: 120px;
+          display: block;
+          overflow: hidden;
+          letter-spacing: 2px;
+          animation: typing 8s steps(30, end),
+          blink 500ms steps(40) infinite normal;
+          border-right:  2px solid snow;
+          white-space: nowrap;
+          font-size: 30px;
+          font-weight: 700;
+          box-sizing: border-box;
+          color: white;
+        }
+        .complete-text {
+          margin: 0 auto;
+          font-size: 24px;
+          font-weight: 600;
+          color: #ccc;
+          animation: showLetter 1s;
+        }
+      }
+
+
       .comment-overlay {
         position: absolute;
         top:0;
@@ -66,5 +118,38 @@
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes typing {
+  0%{
+    width: 0;
+  }
+  60% {
+    width: 100%;
+  }
+  70% {
+    width: 100%;
+  }
+  90% {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  from {
+    border: 0;
+  }
+  to {
+    border: 2px;
+  }
+}
+
+@keyframes showLetter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
