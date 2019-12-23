@@ -6,8 +6,9 @@
     .content {
       width: 100%;
       display: flex;
-      justify-content: space-around;
-      padding-top: 30px;
+      justify-content: center;
+      padding-top: 10%;
+      height: 270px;
       .item {
         cursor: pointer;
         width: 240px;
@@ -16,8 +17,16 @@
         flex-direction: column;
         border-radius: 120px;
         align-items: center;
+        align-self: flex-end;
         justify-content: center;
         position: relative;
+        animation-duration: 3s;
+        animation-iteration-count: 5;
+        animation-name: bounce-6;
+        animation-timing-function: ease;
+        &:first-child {
+          margin-right: 20%;
+        }
         .item-name {
           margin-top: 16px;
         }
@@ -49,3 +58,12 @@
   }
 }
 
+@keyframes bounce-6 {
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-100px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-7px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
+}

@@ -27,24 +27,34 @@ export class LibraryPageComponent implements OnInit {
   faList = faList;
   faShare = faShare;
   faUser = faUser;
+  isShowing = false;
   ngOnInit() {
     this.router.queryParams.pipe(switchMap(value => {
-      console.log(value);
       this.kkHttpClientService.setUserCode(value.code || '');
       if (value.code) {
         return this.kkHttpClientService.accessToken(value.code);
       } else {
         return of(null);
       }
-    })).subscribe(res => {
+    }), switchMap(res => {
       if (res) {
         if (JSON.parse(res.body).error) {
           this.route.navigate(['/kk-auth']).then();
+          return of(null);
         } else {
           this.kkHttpClientService.ACCESSTOKEN = JSON.parse(res.body).access_token;
+          window.localStorage.setItem('token', this.kkHttpClientService.ACCESSTOKEN);
+          return this.kkHttpClientService.getClientData();
         }
       }
-    });
+    })).subscribe(
+      res => {
+        if (res) {
+          this.isShowing = true;
+          console.log(res);
+        }
+      }
+    );
     this.kkHttpClientService.userCode$.subscribe(id => {
       this.AuthCode = id;
       console.log(id, 'id');

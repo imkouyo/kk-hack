@@ -12,7 +12,7 @@ export class KkHttpClientService {
   // tslint:disable-next-line:variable-name
   private _accessToken;
   BaseURL = 'https://api.kkbox.com/v1.1/me';
-  option
+  option;
   constructor(private http: HttpClient) { }
 
   set ACCESSTOKEN(token) {
@@ -35,12 +35,15 @@ export class KkHttpClientService {
     return this.http.get(this.BaseURL, this.option);
   }
   getClientDaily(limit) {
+    this.option = { headers: { Authorization: `Bearer ${this._accessToken}`} };
     return this.http.get(`${this.BaseURL}/daily-recommended-tracks?limit=${limit}`, this.option);
   }
-  getClientAllPlaylist(limit) {
-    return this.http.get(`${this.BaseURL}/playlists?limit=${limit}`, this.option);
+  getClientAllPlaylist() {
+    this.option = { headers: { Authorization: `Bearer ${this._accessToken}`} };
+    return this.http.get(`${this.BaseURL}/playlists?`, this.option);
   }
   getClientPlaylist(id) {
+    this.option = { headers: { Authorization: `Bearer ${this._accessToken}`} };
     return this.http.get(`${this.BaseURL}/playlists/${id}`, this.option);
   }
 

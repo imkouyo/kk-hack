@@ -1,40 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { KkHackService } from '../../service/kk-hack.service';
-import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { KkHttpClientService } from '../../service/kk-http-client.service';
+import { ActivatedRoute } from '@angular/router';
 import { AudioControlService } from '../../service/audio-control.service';
 import { YoutubeService } from '../../service/youtube.service';
 
 @Component({
-  selector: 'app-mood-playlist',
-  templateUrl: './mood-playlist.component.html',
-  styleUrls: ['./mood-playlist.component.scss']
+  selector: 'app-user-playlist-result',
+  templateUrl: './user-playlist-result.component.html',
+  styleUrls: ['./user-playlist-result.component.scss']
 })
-export class MoodPlaylistComponent implements OnInit {
-
-  constructor(private kkHackService: KkHackService,
-              private acRouter: ActivatedRoute,
-              private audioControlService: AudioControlService,
-              private youtubeService: YoutubeService
-  ) { }
-  moodId;
+export class UserPlaylistResultComponent implements OnInit {
   showList;
   currentPlayingIndex;
+  playlistId;
+  constructor(private kkHttpClientService: KkHttpClientService,
+              private acRouter: ActivatedRoute,
+              private audioControlService: AudioControlService,
+              private youtubeService: YoutubeService) { }
+
   ngOnInit() {
+    this.kkHttpClientService.ACCESSTOKEN = window.localStorage.getItem('token');
     this.acRouter.queryParams.subscribe(param => {
-      this.moodId = param.id;
+      this.playlistId = param.id;
     });
 
-    this.kkHackService.isReady$.pipe(switchMap( state => {
-      if (state) {
-        return this.kkHackService.fetchMoodMetaData(this.moodId);
-      } else {
-        return of(null);
-      }
-    })).subscribe( res => {
+    this.kkHttpClientService.getClientPlaylist(this.playlistId).subscribe( res => {
       if (res) {
-        this.showList = res.data.tracks.data;
+        console.log(res);
+        this.showList = res['tracks']['data'];
       }
     });
     this.audioControlService.handleNext$.
@@ -57,7 +52,6 @@ export class MoodPlaylistComponent implements OnInit {
       }
     });
   }
-
   playingIndex(event) {
     console.log(event, this.showList.length);
     this.currentPlayingIndex = event;

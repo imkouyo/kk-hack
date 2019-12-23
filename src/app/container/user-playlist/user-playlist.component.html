@@ -1,1 +1,7 @@
-<p>user-playlist works!</p>
+<div class="container">
+  <app-header></app-header>
+  <div class="playlist">
+    <app-playlist-card *ngFor="let item of playlist" [playlistData]="item"></app-playlist-card>
+  </div>
+</div>
+

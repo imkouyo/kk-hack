@@ -27,6 +27,8 @@ import { MoodPlaylistComponent } from './container/mood-playlist/mood-playlist.c
 import { UserInfoComponent } from './container/user-info/user-info.component';
 import { DailyRecommendComponent } from './container/daily-recommend/daily-recommend.component';
 import { UserPlaylistComponent } from './container/user-playlist/user-playlist.component';
+import { PlaylistCardComponent } from './component/playlist-card/playlist-card.component';
+import { UserPlaylistResultComponent } from './container/user-playlist-result/user-playlist-result.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { UserPlaylistComponent } from './container/user-playlist/user-playlist.c
     MoodPlaylistComponent,
     UserInfoComponent,
     DailyRecommendComponent,
-    UserPlaylistComponent
+    UserPlaylistComponent,
+    PlaylistCardComponent,
+    UserPlaylistResultComponent
   ],
   imports: [
     BrowserModule,

@@ -38,12 +38,11 @@ export class AudioControlComponent implements OnInit {
       this.currentMin = this.timeFormatService.secToMin(time);
     });
     this.audioControlService.ready$.subscribe(state => {
-      console.log(state);
       this.videoReady();
       this.audioControlService.audioState(state);
     });
     this.audioControlService.musicPanel$.subscribe(music => {
-      this.musicName = music.album.name;
+      this.musicName = music.name;
       this.artistName = music.album.artist.name;
       this.coverImage = music.album.images[0].url;
     });

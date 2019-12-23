@@ -1,17 +1,13 @@
 <div class="container">
   <app-header></app-header>
-  <div class="content">
-    <div class="item" bgColor="purple">
-      <fa-icon [icon]="faUser" size="5x" ></fa-icon>
-      <div class="item-name">User Info</div>
-      <div class="shadow-overlay"></div>
-    </div>
-    <div class="item" bgColor="gbluedark">
+
+  <div class="content" *ngIf="isShowing">
+    <div class="item" bgColor="gbluedark" routerLink="/daily-recommend">
       <fa-icon [icon]="faShare" size="5x"></fa-icon>
       <div class="item-name">Daily Recommend</div>
       <div class="shadow-overlay"></div>
     </div>
-    <div class="item" bgColor="blue">
+    <div class="item" bgColor="blue" routerLink="/user-all-playlist">
       <fa-icon [icon]="faCompactDisc" size="5x"></fa-icon>
       <div class="item-name">User Playlist</div>
       <div class="shadow-overlay"></div>
