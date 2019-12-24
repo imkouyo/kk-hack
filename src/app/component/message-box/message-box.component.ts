@@ -1,4 +1,4 @@
-import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import {Messages} from '../../Interface/Messages';
 import { CommentService } from '../../service/comment.service';
@@ -11,7 +11,7 @@ import {takeUntil} from 'rxjs/operators';
   templateUrl: './message-box.component.html',
   styleUrls: ['./message-box.component.scss']
 })
-export class MessageBoxComponent implements OnInit {
+export class MessageBoxComponent implements OnInit, OnDestroy {
   faPaperPlane = faPaperPlane;
   chatBox = this.socket.fromEvent('chat message');
   @ViewChild('content', {static: true}) contentEle;
@@ -23,22 +23,21 @@ export class MessageBoxComponent implements OnInit {
 
   ngOnInit() {
     this.chatBox.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(value => {
-      const comment = {timestamp: '1', text: value['message'] , color: this.titleColorful()};
-      this.messages.push(comment);
-      this.commentService.sendComment(comment);
+      this.sendMessage(value['message']);
     });
   }
-  sendMessage() {
-    if (!!this.text) {
+  sendMessage(text) {
+      const comment = {timestamp: '1', text: text , color: this.titleColorful()};
+      this.messages.push(comment);
+      this.commentService.sendComment(comment);
+  }
+  enterMessage(event) {
+    if (event.key === 'Enter' && !!this.text) {
       this.socket.emit('chat message', {message: this.text});
       this.text = '';
       setTimeout(() => this.scrollToBottom() , 200);
     }
-  }
-  enterMessage(event) {
-    if (event.key === 'Enter') {
-      this.sendMessage();
-    }
+
   }
   titleColorful() {
     return this.colorMap[Math.floor(Math.random() * 6)];
@@ -47,5 +46,8 @@ export class MessageBoxComponent implements OnInit {
     try {
       this.contentEle.nativeElement.scrollTop = this.contentEle.nativeElement.scrollHeight;
     } catch (err) { console.log('error',  err); }
+  }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
   }
 }
