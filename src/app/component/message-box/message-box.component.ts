@@ -39,6 +39,13 @@ export class MessageBoxComponent implements OnInit, OnDestroy {
     }
 
   }
+  clickMessage() {
+    if (!!this.text) {
+      this.socket.emit('chat message', {message: this.text});
+      this.text = '';
+      setTimeout(() => this.scrollToBottom() , 200);
+    }
+  }
   titleColorful() {
     return this.colorMap[Math.floor(Math.random() * 6)];
   }
