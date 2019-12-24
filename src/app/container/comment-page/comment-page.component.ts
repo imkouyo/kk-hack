@@ -64,7 +64,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
     } , 15000);
   }
   createComment(message: Messages) {
-    const randomHeight = Math.floor(Math.random() * 600);
+    const randomHeight = Math.floor(Math.random() * 550);
     const cmt = this.renderer.createElement('div');
     this.renderer.addClass(cmt, 'cmt');
     this.renderer.setAttribute(cmt, 'color', message.color);

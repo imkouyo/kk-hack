@@ -32,7 +32,6 @@
       height: 600px;
       overflow: hidden;
       box-sizing: border-box;
-
       .typewriter {
         position: relative;
         width: 100%;
@@ -59,7 +58,7 @@
           color: white;
         }
         .complete-text {
-          margin: 0 auto;
+          margin: 100px auto 0 auto ;
           font-size: 24px;
           font-weight: 600;
           color: #ccc;
