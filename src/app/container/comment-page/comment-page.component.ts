@@ -7,6 +7,7 @@ import {WhisperComponent} from "../../component/whisper/whisper.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-comment-page',
@@ -14,6 +15,7 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./comment-page.component.scss']
 })
 export class CommentPageComponent implements OnInit, OnDestroy {
+  videoSync = this.socket.fromEvent('video information');
   @ViewChild('commentBoard', {static: true }) elementRef;
   text: string;
   isComplete = false;
@@ -33,9 +35,11 @@ export class CommentPageComponent implements OnInit, OnDestroy {
   constructor(private renderer: Renderer2,
               private commentService: CommentService,
               private audioControlService: AudioControlService,
-              private popup: MatDialog
+              private popup: MatDialog,
+              private socket: Socket,
   ) { }
   ngOnInit() {
+    this.videoSync.subscribe(value => console.log(value, '123'));
     this.audioControlService.isDisable = false;
     this.commentService.comment.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe( (comment) => this.insert(comment));
     if (!!this.audioControlService.player) {

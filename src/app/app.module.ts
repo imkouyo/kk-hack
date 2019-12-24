@@ -29,8 +29,8 @@ import { UserPlaylistComponent } from './container/user-playlist/user-playlist.c
 import { PlaylistCardComponent } from './component/playlist-card/playlist-card.component';
 import { UserPlaylistResultComponent } from './container/user-playlist-result/user-playlist-result.component';
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
-const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
-// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
+// const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
   declarations: [
     AppComponent,

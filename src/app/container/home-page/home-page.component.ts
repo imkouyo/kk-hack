@@ -5,6 +5,7 @@ import {of, Subject} from 'rxjs';
 import { AudioControlService } from '../../service/audio-control.service';
 import { NgxSpinnerService}  from 'ngx-spinner';
 import { YoutubeService } from '../../service/youtube.service';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-home-page',
@@ -20,7 +21,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(private kkHackService: KkHackService,
               private audioControlService: AudioControlService,
               private spinner: NgxSpinnerService,
-              private youtubeService: YoutubeService) { }
+              private youtubeService: YoutubeService,
+              private http: HttpClient) { }
   ngOnInit() {
     this.kkHackService.isReady$.pipe( takeUntil(this.stopSubscribe.asObservable())
       , switchMap(status => {
@@ -77,6 +79,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.stopSubscribe.next(true);
+  }
+  videoData() {
+    this.http.get('/hello').subscribe(value => console.log(value));
   }
 
 }
