@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { KkHackService } from '../../service/kk-hack.service';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {switchMap, takeUntil, tap} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
 import { AudioControlService } from '../../service/audio-control.service';
 import { NgxSpinnerService}  from 'ngx-spinner';
 import { YoutubeService } from '../../service/youtube.service';
@@ -11,17 +11,19 @@ import { YoutubeService } from '../../service/youtube.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
 
   topList = [];
   showList;
   currentPlayingIndex;
+  stopSubscribe = new Subject<boolean>();
   constructor(private kkHackService: KkHackService,
               private audioControlService: AudioControlService,
               private spinner: NgxSpinnerService,
               private youtubeService: YoutubeService) { }
   ngOnInit() {
-    this.kkHackService.isReady$.pipe(switchMap(status => {
+    this.kkHackService.isReady$.pipe( takeUntil(this.stopSubscribe.asObservable())
+      , switchMap(status => {
       if (status) {
         return this.kkHackService.fetchTopPlaylist();
       } else {
@@ -41,7 +43,7 @@ export class HomePageComponent implements OnInit {
       }
     });
     this.audioControlService.handleNext$.
-    pipe(switchMap( state => {
+    pipe(takeUntil(this.stopSubscribe.asObservable()), switchMap( state => {
       console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         const encodeTarget = this.youtubeService
@@ -71,8 +73,10 @@ export class HomePageComponent implements OnInit {
       });
   }
   playingIndex(event) {
-    console.log(event, this.showList.length);
     this.currentPlayingIndex = event;
+  }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
   }
 
 }

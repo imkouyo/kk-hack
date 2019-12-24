@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KkHackService } from '../../service/kk-hack.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
 import { AudioControlService } from '../../service/audio-control.service';
 import { YoutubeService } from '../../service/youtube.service';
 
@@ -21,12 +21,13 @@ export class MoodPlaylistComponent implements OnInit {
   moodId;
   showList;
   currentPlayingIndex;
+  stopSubject = new Subject<boolean>();
   ngOnInit() {
     this.acRouter.queryParams.subscribe(param => {
       this.moodId = param.id;
     });
 
-    this.kkHackService.isReady$.pipe(switchMap( state => {
+    this.kkHackService.isReady$.pipe(takeUntil(this.stopSubject.asObservable()), switchMap( state => {
       if (state) {
         return this.kkHackService.fetchMoodMetaData(this.moodId);
       } else {
@@ -38,7 +39,7 @@ export class MoodPlaylistComponent implements OnInit {
       }
     });
     this.audioControlService.handleNext$.
-    pipe(switchMap( state => {
+    pipe(takeUntil(this.stopSubject.asObservable()), switchMap( state => {
       console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         const encodeTarget = this.youtubeService

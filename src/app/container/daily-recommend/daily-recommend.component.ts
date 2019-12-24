@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
 import { KkHackService } from '../../service/kk-hack.service';
 import { ActivatedRoute } from '@angular/router';
 import { AudioControlService } from '../../service/audio-control.service';
@@ -12,10 +12,11 @@ import { KkHttpClientService } from '../../service/kk-http-client.service';
   templateUrl: './daily-recommend.component.html',
   styleUrls: ['./daily-recommend.component.scss']
 })
-export class DailyRecommendComponent implements OnInit {
+export class DailyRecommendComponent implements OnInit, OnDestroy {
 
   showList;
   currentPlayingIndex;
+  stopSubscribe = new Subject<boolean>();
   constructor(private kkHttpClientService: KkHttpClientService,
               private acRouter: ActivatedRoute,
               private audioControlService: AudioControlService,
@@ -23,10 +24,9 @@ export class DailyRecommendComponent implements OnInit {
 
   ngOnInit() {
     this.kkHttpClientService.ACCESSTOKEN = window.localStorage.getItem('token');
-    this.kkHttpClientService.getClientDaily(15).subscribe(list => this.showList = list['data']);
+    this.kkHttpClientService.getClientDaily(15).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(list => this.showList = list['data']);
     this.audioControlService.handleNext$.
-    pipe(switchMap( state => {
-      console.log(state);
+    pipe(takeUntil(this.stopSubscribe.asObservable()), switchMap( state => {
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         const encodeTarget = this.youtubeService
           .encodeValue(`${this.showList[this.currentPlayingIndex + 1].name} ${this.showList[this.currentPlayingIndex + 1].album.artist.name}`);
@@ -45,8 +45,10 @@ export class DailyRecommendComponent implements OnInit {
     });
   }
   playingIndex(event) {
-    console.log(event, this.showList.length);
     this.currentPlayingIndex = event;
+  }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
   }
 
 }

@@ -1,17 +1,19 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { CommentService } from '../../service/comment.service';
 import { Messages } from '../../Interface/Messages';
 import { AudioControlService } from '../../service/audio-control.service';
 import {Sentence} from "../../Interface/Sentence";
 import {WhisperComponent} from "../../component/whisper/whisper.component";
 import {MatDialog} from "@angular/material/dialog";
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-comment-page',
   templateUrl: './comment-page.component.html',
   styleUrls: ['./comment-page.component.scss']
 })
-export class CommentPageComponent implements OnInit {
+export class CommentPageComponent implements OnInit, OnDestroy {
   @ViewChild('commentBoard', {static: true }) elementRef;
   text: string;
   isComplete = false;
@@ -27,6 +29,7 @@ export class CommentPageComponent implements OnInit {
   storyList = [];
   @ViewChild('board', { static: true}) board: ElementRef;
   @ViewChild('completeBoard', { static: true}) completeBoard: ElementRef;
+  stopSubscribe = new Subject<boolean>();
   constructor(private renderer: Renderer2,
               private commentService: CommentService,
               private audioControlService: AudioControlService,
@@ -34,11 +37,11 @@ export class CommentPageComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.audioControlService.isDisable = false;
-    this.commentService.comment.subscribe( (comment) => this.insert(comment));
+    this.commentService.comment.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe( (comment) => this.insert(comment));
     if (!!this.audioControlService.player) {
       this.talkStory({data: this.story , song: this.videoId, startTime: 70 }).then();
     }
-    this.audioControlService.ready$.subscribe(status => {
+    this.audioControlService.ready$.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(status => {
       if (status === 99 ) {
         this.talkStory({data: this.story , song: this.videoId, startTime: 70 }).then();
       }
@@ -122,7 +125,7 @@ export class CommentPageComponent implements OnInit {
       position: {},
       panelClass: 'whisperOverlay'
     });
-    popupRef.afterClosed().subscribe(res => {
+    popupRef.afterClosed().pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(res => {
       console.log(res);
       console.log('popup close');
       if (res) {
@@ -144,6 +147,9 @@ export class CommentPageComponent implements OnInit {
     for (const child of ch) {
       this.renderer.removeChild(this.completeBoard.nativeElement, child);
     }
+  }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
   }
 
 }

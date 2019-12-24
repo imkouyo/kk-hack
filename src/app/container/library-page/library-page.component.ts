@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { KkHttpClientService } from '../../service/kk-http-client.service';
 import { YoutubeService } from '../../service/youtube.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material';
 import { KkOauthComponent } from '../../component/kk-oauth/kk-oauth.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
 import { faCompactDisc, faList, faShare, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -15,7 +15,7 @@ import { faCompactDisc, faList, faShare, faUser } from '@fortawesome/free-solid-
   styleUrls: ['./library-page.component.scss']
 })
 
-export class LibraryPageComponent implements OnInit {
+export class LibraryPageComponent implements OnInit, OnDestroy {
   constructor(private kkHttpClientService: KkHttpClientService,
               private youtubeService: YoutubeService,
               private spinner: NgxSpinnerService,
@@ -24,16 +24,14 @@ export class LibraryPageComponent implements OnInit {
               private route: Router) { }
   AuthCode;
   faCompactDisc = faCompactDisc;
-  faList = faList;
   faShare = faShare;
-  faUser = faUser;
   isShowing = false;
+  stopSubscribe = new Subject<boolean>();
   ngOnInit() {
-    this.router.queryParams.pipe(switchMap(value => {
+    this.router.queryParams.pipe(takeUntil(this.stopSubscribe.asObservable())
+      , switchMap(value => {
       this.kkHttpClientService.setUserCode(value.code || '');
       if (value.code) {
-        console.log(value.code, 'value');
-        // this.kkHttpClientService.setUserCode(value.code);
         return this.kkHttpClientService.accessToken(value.code);
       } else {
         return of(null);
@@ -54,18 +52,19 @@ export class LibraryPageComponent implements OnInit {
       res => {
         if (res) {
           this.isShowing = true;
-          console.log(res);
         }
       }
     );
-    this.kkHttpClientService.userCode$.subscribe(id => {
+    this.kkHttpClientService.userCode$.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(id => {
       this.AuthCode = id;
-      console.log(id, 'id');
       if (this.AuthCode === '') {
         this.popup.open(KkOauthComponent, {
           panelClass: 'kk-auth-dialog'
         });
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
 import { KkHttpClientService } from '../../service/kk-http-client.service';
 import { ActivatedRoute } from '@angular/router';
 import { AudioControlService } from '../../service/audio-control.service';
@@ -11,10 +11,11 @@ import { YoutubeService } from '../../service/youtube.service';
   templateUrl: './user-playlist-result.component.html',
   styleUrls: ['./user-playlist-result.component.scss']
 })
-export class UserPlaylistResultComponent implements OnInit {
+export class UserPlaylistResultComponent implements OnInit, OnDestroy {
   showList;
   currentPlayingIndex;
   playlistId;
+  stopSubscribe = new Subject<boolean>()
   constructor(private kkHttpClientService: KkHttpClientService,
               private acRouter: ActivatedRoute,
               private audioControlService: AudioControlService,
@@ -33,7 +34,7 @@ export class UserPlaylistResultComponent implements OnInit {
       }
     });
     this.audioControlService.handleNext$.
-    pipe(switchMap( state => {
+    pipe(takeUntil(this.stopSubscribe.asObservable()), switchMap( state => {
       console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         const encodeTarget = this.youtubeService
@@ -56,5 +57,9 @@ export class UserPlaylistResultComponent implements OnInit {
     console.log(event, this.showList.length);
     this.currentPlayingIndex = event;
   }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
+  }
+
 
 }

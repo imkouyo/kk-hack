@@ -3,6 +3,8 @@ import {faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import {Messages} from '../../Interface/Messages';
 import { CommentService } from '../../service/comment.service';
 import {Socket} from "ngx-socket-io";
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-message-box',
@@ -16,10 +18,11 @@ export class MessageBoxComponent implements OnInit {
   text: string;
   messages: Messages[] = [];
   colorMap = ['yellow', 'green', 'blue', 'red', 'orange', 'purple'];
+  stopSubscribe = new Subject<boolean>();
   constructor(private commentService: CommentService, private socket: Socket) { }
 
   ngOnInit() {
-    this.chatBox.subscribe(value => {
+    this.chatBox.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(value => {
       const comment = {timestamp: '1', text: value['message'] , color: this.titleColorful()};
       this.messages.push(comment);
       this.commentService.sendComment(comment);
@@ -30,7 +33,6 @@ export class MessageBoxComponent implements OnInit {
       this.socket.emit('chat message', {message: this.text});
       this.text = '';
       setTimeout(() => this.scrollToBottom() , 200);
-      // this.scrollToBottom();
     }
   }
   enterMessage(event) {

@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { AudioControlService } from '../../service/audio-control.service';
 import { YoutubeService } from '../../service/youtube.service';
 import { HttpParameterCodec } from '@angular/common/http';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-music-card',
@@ -20,19 +22,20 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class MusicCardComponent implements OnInit {
+export class MusicCardComponent implements OnInit, OnDestroy {
   @Input() musicDetail;
   @Input() topOrder;
   @Output() currentIndex = new EventEmitter<number>();
   isShowPhotoAlbum = false;
   searchResult: any;
+  stopSubscribe = new Subject<boolean>();
   constructor(private audioControlService: AudioControlService, private youtubeService: YoutubeService) { }
   ngOnInit() {
   }
   clickMusic() {
     if (!this.isShowPhotoAlbum && !this.searchResult) {
       const encodeTarget = this.youtubeService.encodeValue(`${this.musicDetail.name} ${this.musicDetail.album.artist.name}`);
-      this.youtubeService.searchMusic(encodeTarget, 3).subscribe(
+      this.youtubeService.searchMusic(encodeTarget, 3).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(
         res => {
           this.searchResult = res;
           this.isShowPhotoAlbum = true;
@@ -47,5 +50,8 @@ export class MusicCardComponent implements OnInit {
     this.audioControlService.player.cueVideoById(id);
     this.audioControlService.setMusicOnPanel(this.musicDetail);
     this.currentIndex.emit(this.topOrder);
+  }
+  ngOnDestroy(): void {
+    this.stopSubscribe.next(true);
   }
 }

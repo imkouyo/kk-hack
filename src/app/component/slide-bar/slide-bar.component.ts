@@ -7,7 +7,6 @@ import { faList, faVideo } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./slide-bar.component.scss']
 })
 export class SlideBarComponent implements OnInit, AfterViewInit{
-  faVideo = faVideo;
   faList = faList;
   constructor(private renderer: Renderer2) { }
   @ViewChildren('item') components: QueryList<ElementRef>;
