@@ -24,6 +24,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
               private youtubeService: YoutubeService,
               private http: HttpClient) { }
   ngOnInit() {
+    this.audioControlService.isDisable = false;
     this.kkHackService.isReady$.pipe( takeUntil(this.stopSubscribe.asObservable())
       , switchMap(status => {
       if (status) {
@@ -49,7 +50,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
       console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         const encodeTarget = this.youtubeService
-          .encodeValue(`${this.showList[this.currentPlayingIndex + 1].name} ${this.showList[this.currentPlayingIndex + 1].album.artist.name}`);
+          .encodeValue(`${this.showList[this.currentPlayingIndex + 1].name} ${this.showList[this.currentPlayingIndex + 1]
+            .album.artist.name}`);
         return this.youtubeService.searchMusic(encodeTarget, 1);
       } else {
         return of(null);

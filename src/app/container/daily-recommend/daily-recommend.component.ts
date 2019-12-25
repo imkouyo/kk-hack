@@ -23,6 +23,7 @@ export class DailyRecommendComponent implements OnInit, OnDestroy {
               private youtubeService: YoutubeService) { }
 
   ngOnInit() {
+    this.audioControlService.isDisable = false;
     this.kkHttpClientService.ACCESSTOKEN = window.localStorage.getItem('token');
     this.kkHttpClientService.getClientDaily(15).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(list => this.showList = list['data']);
     this.audioControlService.handleNext$.

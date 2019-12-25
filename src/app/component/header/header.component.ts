@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {faAngleLeft, faAngleRight, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {fromEvent, Subject} from 'rxjs';
+import {debounceTime, takeUntil} from 'rxjs/operators';
+import {SearchService} from '../../service/search.service';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +10,19 @@ import {faAngleLeft, faAngleRight, faSearch} from '@fortawesome/free-solid-svg-i
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   faSearch = faSearch;
   faAngleRight = faAngleRight;
   faAngleLeft = faAngleLeft;
-  constructor() { }
-
+  @ViewChild('inputBar', { static: true }) inputBar: ElementRef;
+  stopSub = new Subject<boolean>();
+  constructor(private searchService: SearchService) { }
   ngOnInit() {
+    fromEvent(this.inputBar.nativeElement, 'keypress').pipe(debounceTime(500), takeUntil(this.stopSub.asObservable())).subscribe(
+      event =>  {
+        console.log(event['target'].value);
+        this.searchService.setCategory(event['target'].value);
+      });
   }
   goBack() {
     window.history.back();
@@ -21,6 +30,9 @@ export class HeaderComponent implements OnInit {
 
   goForward() {
     window.history.forward();
+  }
+  ngOnDestroy(): void {
+    this.stopSub.next(true);
   }
 
 }

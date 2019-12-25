@@ -21,8 +21,10 @@ export class AudioControlService {
   public isPlaying$ = this.isPlaying.asObservable();
   private currentDuration = new BehaviorSubject<number>(0);
   public currentDuration$ = this.currentDuration.asObservable();
-  private ready = new Subject<number>();
+  private ready = new BehaviorSubject<boolean>(false);
   public ready$ = this.ready.asObservable();
+  private playerState = new Subject();
+  public  playerState$ = this.playerState.asObservable();
   private handleNext = new Subject<number>();
   public handleNext$ = this.handleNext.asObservable();
   constructor(private timeFormatService: TimeFormatService) { }
@@ -110,9 +112,16 @@ export class AudioControlService {
       }
     }
   setReadyState(state) {
-    this.ready.next(state);
+    console.log(state);
+    this.playerState.next(state);
+  }
+  setPlayerState() {
+    this.ready.next(true);
   }
   setMusicOnPanel(music) {
     this.musicPanel.next(music);
+  }
+  setAudioCurrentSec(sec) {
+    this.currentDuration.next(sec);
   }
 }

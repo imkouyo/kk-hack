@@ -6,11 +6,11 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class SearchService {
 
-  private handleCategory = new BehaviorSubject<string>('');
-  public handleCategory$ = this.handleCategory.asObservable();
+  private handleSearchBar = new BehaviorSubject<string>('');
+  public handleSearchBar$ = this.handleSearchBar.asObservable();
   constructor() {}
 
-  setCategory(id) {
-    this.handleCategory.next(id);
+  setCategory(text) {
+    this.handleSearchBar.next(text);
   }
 }

@@ -22,6 +22,7 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
               private youtubeService: YoutubeService) { }
 
   ngOnInit() {
+    this.audioControlService.isDisable = false;
     this.kkHttpClientService.ACCESSTOKEN = window.localStorage.getItem('token');
     this.acRouter.queryParams.subscribe(param => {
       this.playlistId = param.id;

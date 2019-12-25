@@ -37,7 +37,7 @@ export class AudioControlComponent implements OnInit {
       this.currentSec = this.timeFormatService.secToSec(time);
       this.currentMin = this.timeFormatService.secToMin(time);
     });
-    this.audioControlService.ready$.subscribe(state => {
+    this.audioControlService.playerState$.subscribe(state => {
       this.videoReady();
       this.audioControlService.audioState(state);
     });
@@ -83,7 +83,7 @@ export class AudioControlComponent implements OnInit {
   }
   initVideo(event) {
     this.audioControlService.player = event.target;
-    this.audioControlService.setReadyState(99);
+    this.audioControlService.setPlayerState();
   }
   handleVideo(event) {
     this.audioControlService.setReadyState(event);
