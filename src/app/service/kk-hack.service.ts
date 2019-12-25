@@ -55,9 +55,9 @@ export class KkHackService {
     return from( this.api.trackFetcher.setTrackID('KpnEGVHEsGgkoB0MBk').fetchMetadata());
   }
   // text to search
-  searchResult() {
+  searchResult(target) {
     return from( this.api.searchFetcher
-      .setSearchCriteria('五月天 好好')
+      .setSearchCriteria(target)
       //  .filter({artist: '五月天'})  track albums artist playlist availableTerritory(region) option use
       .fetchSearchResult());
   }

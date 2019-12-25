@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  display: flex;
+  img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    background: red;
+  }
+  .song-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: calc(100% - 120px);
+    margin-left: 20px;
+    .song-title {
+      font-size: 20px;
+      padding-bottom: 10px;
+    }
+    .song-artist {
+      font-size: 16px;
+    }
+  }
+}

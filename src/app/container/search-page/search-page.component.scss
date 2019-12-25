@@ -1,8 +1,70 @@
 .container {
-  width: 100%;
+  width: calc(100% - 230px);
   display: flex;
   flex-wrap: wrap;
   app-category-card {
     margin: 30px;
+  }
+}
+.container {
+  .main-group {
+    display: flex;
+    width: 100%;
+    .top-result-group{
+      img {
+        display: block;
+        width: 240px;
+        height: 240px;
+        background: white;
+        border-radius: 30px;
+      }
+      .top-title {
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .top-result {
+        width: 430px;
+        height: 240px;
+        background: #4184c5;
+        border-radius: 30px;
+        display: flex;
+        .detail-group {
+          width: calc(100% - 240px);
+          padding-bottom: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          flex-direction: column;
+          .top-result-title {
+            font-size: 22px;
+            padding-bottom: 10px;
+          }
+        }
+      }
+    }
+    .songs-group {
+      width: 100%;
+      padding-left: 30px;
+      box-sizing: border-box;
+      .songs-title {
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .song-group-container {
+        height: 240px;
+        overflow-y: scroll;
+      }
+    }
+  }
+  .playlist-group {
+    overflow-x: scroll;
+    .group-title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .playlist-container {
+      display: flex;
+    }
+
   }
 }

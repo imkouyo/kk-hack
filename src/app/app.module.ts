@@ -29,6 +29,8 @@ import { UserPlaylistComponent } from './container/user-playlist/user-playlist.c
 import { PlaylistCardComponent } from './component/playlist-card/playlist-card.component';
 import { UserPlaylistResultComponent } from './container/user-playlist-result/user-playlist-result.component';
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
+import { SearchResultCardComponent } from './component/search-result-card/search-result-card.component';
+import { SearchPlaylistCardComponent } from './component/search-playlist-card/search-playlist-card.component';
 // const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
@@ -51,7 +53,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     DailyRecommendComponent,
     UserPlaylistComponent,
     PlaylistCardComponent,
-    UserPlaylistResultComponent
+    UserPlaylistResultComponent,
+    SearchResultCardComponent,
+    SearchPlaylistCardComponent
   ],
   imports: [
     BrowserModule,
