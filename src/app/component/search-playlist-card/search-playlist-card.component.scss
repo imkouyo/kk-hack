@@ -1,16 +1,21 @@
-.container {
-  width: 240px;
-  img {
-    display: block;
-    height: 240px;
+:host{
+  padding: 20px;
+  .container {
     width: 240px;
-    background: yellow;
-  }
-  .playlist-title {
-    font-size: 18px;
-  }
-  .playlist-desc {
-    font-size: 16px;
-
+    img {
+      display: block;
+      height: 240px;
+      width: 240px;
+      background: yellow;
+    }
+    .playlist-title {
+      font-size: 20px;
+    }
+    .playlist-desc {
+      font-size: 16px;
+      height: 60px;
+      text-overflow: ellipsis;
+    }
   }
 }
+

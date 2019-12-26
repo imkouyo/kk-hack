@@ -33,24 +33,17 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   clickMusic() {
-    if (!this.isShowPhotoAlbum && !this.searchResult) {
       const encodeTarget = this.youtubeService.encodeValue(`${this.musicDetail.name} ${this.musicDetail.album.artist.name}`);
-      this.youtubeService.searchMusic(encodeTarget, 3).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(
+      this.youtubeService.searchMusic(encodeTarget, 1).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(
         res => {
           this.searchResult = res;
-          this.isShowPhotoAlbum = true;
+          this.audioControlService.player.cueVideoById(res['items'][0].id.videoId);
+          this.audioControlService.play();
+          this.audioControlService.setMusicOnPanel(this.musicDetail);
+          this.currentIndex.emit(this.topOrder);
         }
       );
-    } else {
-      this.isShowPhotoAlbum = !this.isShowPhotoAlbum && !!this.searchResult;
     }
-  }
-
-  selectMusic(id) {
-    this.audioControlService.player.cueVideoById(id);
-    this.audioControlService.setMusicOnPanel(this.musicDetail);
-    this.currentIndex.emit(this.topOrder);
-  }
   ngOnDestroy(): void {
     this.stopSubscribe.next(true);
   }

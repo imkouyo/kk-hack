@@ -1,5 +1,5 @@
 .container {
-  width: calc(100% - 230px);
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   app-category-card {
@@ -7,25 +7,32 @@
   }
 }
 .container {
+  &.search {
+    align-items: center;
+    justify-content: center;
+  }
+  .not-found { margin: 150px auto}
   .main-group {
+    padding-bottom: 50px;
     display: flex;
-    width: 100%;
+    width: 95%;
     .top-result-group{
+      padding-right: 50px;
       img {
         display: block;
         width: 240px;
         height: 240px;
-        background: white;
         border-radius: 30px;
       }
       .top-title {
         font-size: 28px;
         font-weight: bold;
+        padding-bottom: 30px;
       }
       .top-result {
         width: 430px;
         height: 240px;
-        background: #4184c5;
+        background: #222;
         border-radius: 30px;
         display: flex;
         .detail-group {
@@ -49,21 +56,35 @@
       .songs-title {
         font-size: 28px;
         font-weight: bold;
+        padding-bottom: 30px;
       }
       .song-group-container {
         height: 240px;
         overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 10px;
+        }
+        &::-webkit-scrollbar-track {
+          background: #282828;
+          border-radius: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #555555;
+          border-radius: 5px;
+        }
       }
     }
   }
   .playlist-group {
-    overflow-x: scroll;
+    width: 95%;
     .group-title {
       font-size: 28px;
       font-weight: bold;
+      padding-bottom: 30px;
     }
     .playlist-container {
       display: flex;
+      flex-wrap: wrap;
     }
 
   }

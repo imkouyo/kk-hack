@@ -1,46 +1,42 @@
-<!--<app-header></app-header>-->
-<!--<h1></h1>-->
-<!--<div class="container">-->
-<!--  <app-category-card *ngFor="let item of moodList; let i = index" [data]="item" [index]="i"></app-category-card>-->
-<!--</div>-->
-<!--<ng-template>-->
-  <div class="container">
-    <div class="main-group">
-      <div class="top-result-group">
-        <div class="top-title">Top Result</div>
-        <div class="top-result">
-          <img src="#" alt="">
-          <div class="detail-group">
-            <div class="top-result-title">Trash Car</div>
-            <div class="top-result-artist">May day</div>
+<app-header></app-header>
+<ng-container [ngSwitch]="mode">
+  <ng-template [ngSwitchCase]="'init'">
+    <div class="container">
+      <app-category-card *ngFor="let item of moodList; let i = index" [data]="item" [index]="i"></app-category-card>
+    </div>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'search'">
+    <div class="container search">
+      <div class="main-group">
+        <div class="top-result-group">
+          <div class="top-title">Top Result</div>
+          <div class="top-result" (click)="clickMusic()">
+            <img [attr.src]="topCover" alt="">
+            <div class="detail-group">
+              <div class="top-result-title">{{topName}}</div>
+              <div class="top-result-artist">{{topArtist}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="songs-group">
+          <div class="songs-title">Songs</div>
+          <div class="song-group-container">
+            <app-search-result-card *ngFor="let item of result.tracks['data']" [musicData]="item"></app-search-result-card>
           </div>
         </div>
       </div>
-      <div class="songs-group">
-        <div class="songs-title">Songs</div>
-        <div class="song-group-container">
-          <app-search-result-card></app-search-result-card>
-          <app-search-result-card></app-search-result-card>
-          <app-search-result-card></app-search-result-card>
-          <app-search-result-card></app-search-result-card>
+      <div class="playlist-group">
+        <div class="group-title">Playlist</div>
+        <div class="playlist-container">
+          <app-search-playlist-card *ngFor="let item of result.playlists['data']" [playlistData]="item"></app-search-playlist-card>
         </div>
       </div>
     </div>
-    <div class="playlist-group">
-      <div class="group-title">Playlist</div>
-      <div class="playlist-container">
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-        <app-search-playlist-card></app-search-playlist-card>
-      </div>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'notfound'">
+    <div class="container">
+      <h1 class="not-found">Can't not found the result, Please check it again.</h1>
     </div>
-  </div>
-<!--</ng-template>-->
+  </ng-template>
+</ng-container>
+
