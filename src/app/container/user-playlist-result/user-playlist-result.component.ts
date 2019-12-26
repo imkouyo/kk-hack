@@ -5,6 +5,7 @@ import { KkHttpClientService } from '../../service/kk-http-client.service';
 import { ActivatedRoute } from '@angular/router';
 import { AudioControlService } from '../../service/audio-control.service';
 import { YoutubeService } from '../../service/youtube.service';
+import {KkHackService} from "../../service/kk-hack.service";
 
 @Component({
   selector: 'app-user-playlist-result',
@@ -15,8 +16,10 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
   showList;
   currentPlayingIndex;
   playlistId;
+  playlistType;
   stopSubscribe = new Subject<boolean>()
   constructor(private kkHttpClientService: KkHttpClientService,
+              private kkHackService: KkHackService,
               private acRouter: ActivatedRoute,
               private audioControlService: AudioControlService,
               private youtubeService: YoutubeService) { }
@@ -24,14 +27,22 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.audioControlService.isDisable = false;
     this.kkHttpClientService.ACCESSTOKEN = window.localStorage.getItem('token');
-    this.acRouter.queryParams.subscribe(param => {
+    this.acRouter.queryParams.pipe(switchMap(param => {
       this.playlistId = param.id;
-    });
-
-    this.kkHttpClientService.getClientPlaylist(this.playlistId).subscribe( res => {
+      this.playlistType = param.type;
+      if (this.playlistType === 'me') {
+        return this.kkHttpClientService.getClientPlaylist(this.playlistId)
+      } else {
+        return this.kkHackService.fetchSharePlaylist(this.playlistId)
+      }
+    })).subscribe( res => {
       if (res) {
         console.log(res);
-        this.showList = res['tracks']['data'];
+        if (this.playlistType === 'me') {
+          this.showList = res['tracks']['data'];
+        } else {
+          this.showList = res['data']['tracks']['data'];
+        }
       }
     });
     this.audioControlService.handleNext$.

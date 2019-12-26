@@ -8,8 +8,11 @@
   grid-template-columns: 1fr 1fr 4fr 2fr 2fr;
   align-items: center;
   box-sizing: border-box;
-  border-bottom: #666 1px solid;
+  border-bottom: #303030 1px solid;
   font-size: 15px;
+  &:hover {
+    background: #222222;
+  }
   & > * {
     padding: 0 10px;
     box-sizing: border-box;
@@ -21,28 +24,5 @@
       border-radius: 30px;
       overflow: hidden;
     }
-  }
-}
-.search-container {
-  .search-item {
-    padding: 10px 24px;
-    display: flex;
-    align-items: center;
-    border-bottom: #666 1px solid;
-    transition: height .5s;
-    img {
-      border-radius: 5px;
-      margin-right: 24px;
-    }
-  }
-
-}
-
-@keyframes ww {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 100%;
   }
 }

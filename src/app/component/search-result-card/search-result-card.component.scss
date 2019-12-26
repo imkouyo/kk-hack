@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  cursor: pointer;
   display: flex;
   img {
     display: block;
@@ -21,5 +22,8 @@
     .song-artist {
       font-size: 16px;
     }
+  }
+  &:hover {
+    background: #282828;
   }
 }

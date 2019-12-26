@@ -13,7 +13,7 @@ export class PlaylistCardComponent implements OnInit {
   ngOnInit() {
   }
   selectPlaylist() {
-    this.router.navigate(['/user-playlist'], {queryParams: {id: this.playlistData.id}});
+    this.router.navigate(['/user-playlist'], {queryParams: {id: this.playlistData.id, type: 'me'}});
 
   }
 

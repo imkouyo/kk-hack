@@ -1,4 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-playlist-card',
@@ -10,7 +11,7 @@ export class SearchPlaylistCardComponent implements OnInit, OnChanges {
   playlistCover;
   playlistName;
   playlistDesc;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,4 +22,7 @@ export class SearchPlaylistCardComponent implements OnInit, OnChanges {
       this.playlistData.description.substr(0, 42) + '...' : this.playlistData.description) || '';
   }
 
+  choosePlaylist() {
+    this.router.navigate(['/user-playlist'], {queryParams: {id: this.playlistData.id, type: 'search'}});
+  }
 }

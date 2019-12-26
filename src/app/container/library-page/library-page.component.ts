@@ -47,6 +47,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
           window.localStorage.setItem('token', this.kkHttpClientService.ACCESSTOKEN);
           return this.kkHttpClientService.getClientData();
         }
+      } else {
+        return of(null)
       }
     })).subscribe(
       res => {

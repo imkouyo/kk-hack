@@ -5,8 +5,9 @@
   <div class="route-btn" (click)="goForward()">
     <fa-icon [icon]="faAngleRight" size="2x"></fa-icon>
   </div>
-  <div class="search-panel">
+  <div class="search-panel" [ngStyle]="{ 'visibility': isShowSearchBar  ? 'visible' : 'hidden'}">
     <fa-icon [icon]="faSearch"></fa-icon>
-    <input type="text" placeholder="Search song" #inputBar>
+    <input  type="text" placeholder="Search song" #inputBar>
   </div>
+  <app-user-info></app-user-info>
 </div>

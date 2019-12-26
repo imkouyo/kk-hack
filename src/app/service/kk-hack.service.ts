@@ -84,4 +84,8 @@ export class KkHackService {
   fetchTopPlaylistData(id) {
     return from( this.api.chartFetcher.setPlaylistID(id).fetchTracks());
   }
+  fetchSharePlaylist(id) {
+    return from(this.api.sharedPlaylistFetcher.setPlaylistID(id).fetchMetadata());
+  }
+
 }
