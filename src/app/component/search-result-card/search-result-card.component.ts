@@ -1,9 +1,8 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {YoutubePlayerService} from "ngx-youtube-player";
-import {AudioControlService} from "../../service/audio-control.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {YoutubeService} from "../../service/youtube.service";
+import {AudioControlService} from '../../service/audio-control.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {YoutubeService} from '../../service/youtube.service';
 
 @Component({
   selector: 'app-search-result-card',

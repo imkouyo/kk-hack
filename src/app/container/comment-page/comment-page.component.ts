@@ -8,6 +8,7 @@ import {interval, of, Subject, Subscription} from 'rxjs';
 import {delay, switchMap, take, takeUntil, timeout} from 'rxjs/operators';
 import {Socket} from 'ngx-socket-io';
 import {HttpClient} from '@angular/common/http';
+import {WhisperComponent} from '../../component/whisper/whisper.component';
 
 @Component({
   selector: 'app-comment-page',
@@ -33,6 +34,9 @@ export class CommentPageComponent implements OnInit, OnDestroy {
               private http: HttpClient
   ) { }
   ngOnInit() {
+    this.popup.open(WhisperComponent, {
+      panelClass: 'whisperOverlay',
+    });
     console.log('hello');
     this.videoSync.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(videoDetail => {
       console.log('wef');
@@ -111,7 +115,8 @@ export class CommentPageComponent implements OnInit, OnDestroy {
   }
 
   createWhisper() {
-    this.audioControlService.player.seekTo(100);
+    // this.audioControlService.player.seekTo(100);
+    this.popup.open(WhisperComponent);
   }
   makeStory(whisper) {
     const story: Sentence[] = [];

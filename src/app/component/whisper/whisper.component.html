@@ -3,20 +3,65 @@
     <div class="title">Create Whisper</div>
     <fa-icon [icon]="faTimes"  size="2x" (click)="closePopup()"></fa-icon>
   </div>
-  <form [formGroup]="whisperForm">
-    <div class="whisper-group">
-      <label for="recipient">Recipient</label>
-      <input type="text" id=recipient name="recipient" formControlName="name">
-      <label for="song">Song(Youtube Video ID)</label>
-      <input type="text" id="song" formControlName="song">
-      <label for="startTime">Start Time(default: 0 sec)</label>
-      <input type="text" id="startTime" formControlName="startTime">
-      <label for="sentence">What you want say</label>
-      <textarea name="" id="sentence" cols="30" rows="10" formControlName="sentence"></textarea>
-    </div>
-    <div class="btn-group">
-      <button class="cancel-btn" (click)="closePopup()">Cancel</button>
-      <button class="ok-btn" (click)="createWhisper(whisperForm.value)">Create</button>
-    </div>
-  </form>
+  <div [ngSwitch]="stepList[step]">
+    <ng-template [ngSwitchCase]="'step1'">
+      <div class="step1">
+        <p>Whom do you want to talk to?</p>
+        <div class="group-item">
+          <label for="userName">User Name</label>
+          <input type="text" id="userName" [(ngModel)]="userName">
+        </div>
+        <div class="group-item">
+          <label for="whisperName">Receiver Name</label>
+          <input type="text" id="whisperName" [(ngModel)]="whisperName">
+        </div>
+      </div>
+
+    </ng-template>
+    <ng-template [ngSwitchCase]="'step2'">
+      <div class="step2">
+        <div class="search-bar">
+          <fa-icon [icon]="faSearch"></fa-icon>
+          <input type="text" id="audioName" (keyup)="searchSong($event)" placeholder="Search Song">
+        </div>
+        <div class="audio-list">
+          <app-whisper-music-card *ngFor="let item of audioList" [musicData] = item></app-whisper-music-card>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template [ngSwitchCase]="'step3'">
+      <div class="step3">
+        <div class="story-title"></div>
+        <textarea [placeholder]="areaPlaceholder" [(ngModel)]="storyText"></textarea>
+      </div>
+    </ng-template>
+  </div>
+  <div class="btn-group">-->
+    <button class="cancel-btn" (click)="previousPage()">Cancel</button>
+    <button class="ok-btn" (click)="nextPage()">Create</button>
+  </div>
+<!--  <form [formGroup]="whisperForm">-->
+<!--    <div class="whisper-group">-->
+<!--      <label for="recipient">Recipient</label>-->
+<!--      <input type="text" id=recipient name="recipient" formControlName="name">-->
+<!--      <label for="song">Song(Youtube Video ID)</label>-->
+<!--      <input type="text" id="song" formControlName="song">-->
+<!--      <label for="sentence">What you want say</label>-->
+<!--      <textarea name="" id="sentence" cols="30" rows="10" formControlName="sentence"></textarea>-->
+<!--    </div>-->
+<!--    <div class="btn-group">-->
+<!--      <button class="cancel-btn" (click)="closePopup()">Cancel</button>-->
+<!--      <button class="ok-btn" (click)="createWhisper(whisperForm.value)">Create</button>-->
+<!--    </div>-->
+<!--  </form>-->
+
 </div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

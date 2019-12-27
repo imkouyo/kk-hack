@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 5px 30px;
+  width: 100%;
+  box-sizing: border-box;
+  img {
+    width: 60px;
+    height: 60px;
+    background: #4184c5;
+  }
+  .song-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    justify-content: space-around;
+    .song-name {
+      font-size: 18px;
+      font-weight: 600;
+      width: 280px;
+      color: #121212;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .song-artist {
+      width: 280px;
+      font-size: 14px;
+      color: #121212;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+}

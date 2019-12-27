@@ -11,7 +11,14 @@ import { HeaderComponent } from './component/header/header.component';
 import { MusicCardComponent } from './component/music-card/music-card.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatExpansionModule, MatSliderModule, MatTabsModule } from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatInputModule,
+  MatSliderModule,
+  MatTabsModule
+} from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MessageBoxComponent } from './component/message-box/message-box.component';
@@ -31,6 +38,8 @@ import { UserPlaylistResultComponent } from './container/user-playlist-result/us
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import { SearchResultCardComponent } from './component/search-result-card/search-result-card.component';
 import { SearchPlaylistCardComponent } from './component/search-playlist-card/search-playlist-card.component';
+import { StepFormComponent } from './component/step-form/step-form.component';
+import { WhisperMusicCardComponent } from './component/whisper-music-card/whisper-music-card.component';
 // const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
@@ -55,7 +64,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     PlaylistCardComponent,
     UserPlaylistResultComponent,
     SearchResultCardComponent,
-    SearchPlaylistCardComponent
+    SearchPlaylistCardComponent,
+    StepFormComponent,
+    WhisperMusicCardComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -72,6 +84,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     MatExpansionModule,
     NgxSpinnerModule,
     SocketIoModule.forRoot(config),
+    MatAutocompleteModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
