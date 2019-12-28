@@ -34,12 +34,8 @@ export class CommentPageComponent implements OnInit, OnDestroy {
               private http: HttpClient
   ) { }
   ngOnInit() {
-    this.popup.open(WhisperComponent, {
-      panelClass: 'whisperOverlay',
-    });
-    console.log('hello');
+
     this.videoSync.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(videoDetail => {
-      console.log('wef');
       if (this.audioControlService.player) {
         this.audioControlService.player.cueVideoById(videoDetail['videoId']);
         this.audioControlService.player.seekTo(videoDetail['time']);
@@ -115,16 +111,9 @@ export class CommentPageComponent implements OnInit, OnDestroy {
   }
 
   createWhisper() {
-    // this.audioControlService.player.seekTo(100);
-    this.popup.open(WhisperComponent);
-  }
-  makeStory(whisper) {
-    const story: Sentence[] = [];
-    story.push({page: 1, sumPage: whisper.sentence.split('\n').length + 1, text: `Dear ${whisper.name}: `});
-    whisper.sentence.split('\n').forEach((value, index, array) => {
-      story.push( { page: index + 2 , sumPage: array.length + 1 , text: value});
+    this.popup.open(WhisperComponent, {
+      panelClass: 'whisperOverlay',
     });
-    this.storyList.unshift({data: story, song: whisper.song, startTime: whisper.startTime });
   }
 
   resetCompleteBoard() {
