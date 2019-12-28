@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" (click)="selectMusic()">
   <img [attr.src]="musicCover" alt="">
-  <div class="song-group">
+  <div class="song-group" [ngClass]="{'active': isChoose}">
     <div class="song-name">{{musicName}}</div>
     <div class="song-artist">{{musicArtist}}</div>
   </div>
