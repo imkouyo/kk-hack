@@ -26,3 +26,14 @@
     }
   }
 }
+@media (max-width: 1070px) {
+  .container {
+    grid-template-columns: 1fr 4fr 3fr;
+    .top-order {
+      display: none;
+    }
+    .album {
+      display: none;
+    }
+  }
+}

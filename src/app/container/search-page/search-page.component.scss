@@ -4,6 +4,8 @@
   flex-wrap: wrap;
   app-category-card {
     margin: 30px;
+    width: 15%;
+    box-sizing: border-box;
   }
 }
 .container {
@@ -19,10 +21,12 @@
     .top-result-group{
       padding-right: 50px;
       cursor: pointer;
+      width: 40%;
       img {
         display: block;
-        width: 240px;
-        height: 240px;
+        width: 50%;
+        max-width: 240px;
+        max-height: 240px;
         border-radius: 30px;
       }
       .top-title {
@@ -31,8 +35,9 @@
         padding-bottom: 30px;
       }
       .top-result {
-        width: 430px;
-        height: 240px;
+        width: 100%;
+        max-width: 430px;
+        max-height: 240px;
         background: #222;
         border-radius: 30px;
         display: flex;
@@ -51,7 +56,7 @@
       }
     }
     .songs-group {
-      width: 100%;
+      width: 60%;
       padding-left: 30px;
       box-sizing: border-box;
       .songs-title {
@@ -88,5 +93,37 @@
       flex-wrap: wrap;
     }
 
+  }
+}
+@media (max-width: 1360px) {
+  .container.search {
+    .main-group {
+      display: flex;
+      flex-direction: column;
+      .top-result-group{
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        .top-title {
+          padding-top: 20px;
+          padding-bottom: 15px;
+        }
+      }
+      .songs-group {
+        width: 100%;
+        padding-left: 15px;
+
+        .songs-title {
+          padding-top: 20px;
+          padding-bottom: 15px;
+        }
+      }
+    }
+    .playlist-group {
+      .group-title{
+        padding: 20px 0 15px 15px;
+      }
+    }
   }
 }

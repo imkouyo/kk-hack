@@ -1,6 +1,6 @@
 <div class="container">
   <app-header></app-header>
-  <mat-tab-group (focusChange)="getTopList($event)">
+  <mat-tab-group (focusChange)="getTopList($event)" class="home">
     <mat-tab label="Comprehensive" >
       <div *ngTemplateOutlet="playlist"></div>
     </mat-tab>
@@ -22,10 +22,10 @@
   <div class="music-list-container">
     <div class="grid-title">
       <div class="grid-item">Cover Photo</div>
-      <div class="grid-item">Top</div>
+      <div class="grid-item order">Top</div>
       <div class="grid-item">Song Name</div>
       <div class="grid-item">Artist</div>
-      <div class="grid-item">Album</div>
+      <div class="grid-item album">Album</div>
     </div>
     <app-music-card
       *ngFor="let item of showList;

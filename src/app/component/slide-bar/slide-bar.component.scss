@@ -46,3 +46,21 @@
     }
   }
 }
+@media (max-width: 720px) {
+  .container {
+    width: 70px;
+    .nav-bar.logo {
+      display: none;
+    }
+    .nav-bar.group {
+      .nav-bar.item {
+        & {
+          width: 100%;
+        }
+        a {
+          display: none;
+        }
+      }
+    }
+  }
+}

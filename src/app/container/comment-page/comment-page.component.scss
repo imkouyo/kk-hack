@@ -9,7 +9,7 @@
     font-size: 16px;
     color: white;
     border: 0;
-    margin: 24px;
+    margin: 24px 24px 24px auto;
     cursor: pointer;
     &:hover {
       background-color: #4174bb;
@@ -19,7 +19,6 @@
     }
   }
   .container {
-    padding-top: 50px;
     display: flex;
     width: 100%;
     max-width: 1380px;
@@ -28,8 +27,8 @@
     box-sizing: border-box;
     .comment-container {
       position: relative;
-      width: 800px;
-      height: 600px;
+      width: 54vw;
+      height: 36vw;
       overflow: hidden;
       box-sizing: border-box;
       .typewriter {
@@ -109,6 +108,27 @@
     }
 
   }
+  @media (max-width: 1250px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .comment-container {
+        width:calc(100vw - 280px);
+      }
+    }
+  }
+  @media (max-width: 720px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .comment-container {
+        width:calc(100vw - 110px);
+      }
+    }
+  }
+
 
 }
 @keyframes cmtPath {
@@ -152,3 +172,11 @@
     opacity: 1;
   }
 }
+@media (max-width: 720px) {
+  .container {
+    .route-btn {
+      display: none;
+    }
+  }
+}
+

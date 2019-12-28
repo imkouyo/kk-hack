@@ -17,3 +17,13 @@
     }
   }
 }
+@media (max-width: 720px) {
+  .container {
+    img {
+     margin-left: 10px;
+    }
+    .name {
+      display: none;
+    }
+  }
+}

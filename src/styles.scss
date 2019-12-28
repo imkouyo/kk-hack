@@ -66,5 +66,19 @@ app-home-page {
       font-size: 18px;
       font-weight: bold;
     }
+    @media (max-width: 1250px) {
+      &.home {
+        width: calc(100vw - 250px);
+
+      }
+    }
+    @media (max-width: 720px) {
+      &.home {
+        width: calc(100vw - 90px);
+      }
+    }
+    .mat-tab-header-pagination-chevron {
+      border-color: #d8d8d8;
+    }
   }
 }

@@ -5,7 +5,8 @@
   <div class="route-btn" (click)="goForward()">
     <fa-icon [icon]="faAngleRight" size="2x"></fa-icon>
   </div>
-  <div class="search-panel" [ngStyle]="{ 'visibility': isShowSearchBar  ? 'visible' : 'hidden'}">
+  <div [ngStyle]="{'display' : isShowPageName? 'block' : 'none'}" style="font-weight: bold; font-size: 20px; color: snow">{{currentPageName}}</div>
+  <div class="search-panel" [ngStyle]="{ 'display': isShowSearchBar  ? 'flex' : 'none'}">
     <fa-icon [icon]="faSearch"></fa-icon>
     <input  type="text" placeholder="Search song" #inputBar>
   </div>

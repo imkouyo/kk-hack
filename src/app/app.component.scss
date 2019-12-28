@@ -15,5 +15,12 @@
       height: 100%;
     }
   }
+  @media (max-width: 720px) {
+    .container {
+      .content {
+        padding-left: 70px;
+      }
+    }
+  }
 }
 

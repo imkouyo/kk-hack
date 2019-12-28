@@ -1,5 +1,11 @@
 <app-header></app-header>
+<div class="tipsBar">
+  <div class="tips">Next whisper: <div>123</div></div>
+  <button class="new-whisper" (click)="createWhisper()">Create new whisper</button>
+</div>
+
 <div class="container">
+
   <div class="comment-container">
     <div class="typewriter" #board>
       <div class="typewriter-text">{{text}}</div>
@@ -9,5 +15,4 @@
   </div>
   <app-message-box></app-message-box>
 </div>
-<button class="new-whisper" (click)="createWhisper()">Create new whisper</button>
 

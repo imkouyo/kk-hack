@@ -9,6 +9,10 @@
     </div>
   </div>
   <div class="panel-group">
+    <div class="mobile-description">
+      <div class="mobile-title">{{musicName}}</div>
+      <div class="mobile-text">{{ artistName}}</div>
+    </div>
     <div class="music-panel">
       <fa-icon [icon]="faBackward"></fa-icon>
       <fa-icon *ngIf="!(this.audioControlService.isPlaying$ | async)" [icon]="faPlay" (click)="play()"></fa-icon>

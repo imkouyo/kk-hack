@@ -27,5 +27,18 @@
       }
     };
   }
+  @media (max-width: 1070px) {
+    .container {
+      .grid-title {
+        grid-template-columns: 1fr 4fr 3fr;
+        .grid-item.order {
+          display: none;
+        }
+        .grid-item.album {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
