@@ -39,7 +39,7 @@
     }
     .chat-content {
       overflow-y: scroll;
-      height: 468px;
+      height: 100%;
       box-sizing: border-box;
       .message {
         display: flex;
