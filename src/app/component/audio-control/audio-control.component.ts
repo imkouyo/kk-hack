@@ -88,4 +88,7 @@ export class AudioControlComponent implements OnInit {
   handleVideo(event) {
     this.audioControlService.setReadyState(event);
   }
+  handleNext(e) {
+    this.audioControlService.setHandleNext(e);
+  }
 }

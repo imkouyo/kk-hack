@@ -153,6 +153,11 @@
        color: #121212;
      }
    }
+    @media (max-width: 720px) {
+      &{
+        width: 300px;
+      }
+    }
   }
   .step3 {
     padding: 16px;
@@ -162,6 +167,13 @@
       width: 430px;
       height: 270px;
       padding: 16px;
+    }
+    @media (max-width: 720px) {
+      textarea{
+        width: 270px;
+        padding: 0;
+        border: 1px solid #d8d8d8;
+      }
     }
   }
 }

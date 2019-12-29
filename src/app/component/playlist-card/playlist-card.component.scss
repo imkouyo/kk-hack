@@ -17,7 +17,19 @@
       font-weight: 500;
       width: 240px;
       text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    @media (max-width: 720px) {
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      .title {
+        width: 150px;
+      }
     }
   }
+
 
 }

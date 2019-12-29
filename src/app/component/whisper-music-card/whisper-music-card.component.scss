@@ -37,5 +37,17 @@
       overflow: hidden;
     }
   }
+  @media (max-width: 720px) {
+    .song-group {
+      .song-name {
+        width: 180px;
+        font-size: 16px;
+      }
+      .song-artist {
+        width: 180px;
+        font-size: 12px;
+      }
+    }
+  }
 
 }

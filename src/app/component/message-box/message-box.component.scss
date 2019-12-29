@@ -21,6 +21,21 @@
         padding-left: 8px;
         color: #aaaaaa
       }
+      .comment-group {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        fa-icon::ng-deep {
+          margin-right: 10px;
+          padding-top: 5px;
+          box-sizing: border-box;
+          svg {
+            path {
+              fill: #aaa;
+            }
+          }
+        }
+      }
     }
     .chat-content {
       overflow-y: scroll;
@@ -118,10 +133,11 @@
     }
   }
   @media (max-width: 1250px) {
-    margin-top: 60px;
+    margin-top: 30px;
     width: calc(100vw - 280px);
     .container {
       width: 100%;
+      min-height: 330px;
     }
   }
 
@@ -129,6 +145,7 @@
     width: calc(100vw - 110px);
     .container {
       width: 100%;
+      min-height: 200px;
     }
   }
 }

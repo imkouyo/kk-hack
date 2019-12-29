@@ -47,20 +47,24 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
     this.audioControlService.handleNext$.
     pipe(takeUntil(this.stopSubscribe.asObservable()), switchMap( state => {
-      console.log(state);
+      console.log(this.currentPlayingIndex ,'b', state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
+        this.currentPlayingIndex += 1;
         const encodeTarget = this.youtubeService
-          .encodeValue(`${this.showList[this.currentPlayingIndex + 1].name} ${this.showList[this.currentPlayingIndex + 1]
-            .album.artist.name}`);
+          .encodeValue(`${this.showList[this.currentPlayingIndex].name} ${this.showList[this.currentPlayingIndex].album.artist.name}`);
+        return this.youtubeService.searchMusic(encodeTarget, 1);
+      } else if(state === -1  && this.currentPlayingIndex - 1 >= 0) {
+        this.currentPlayingIndex -= 1;
+        const encodeTarget = this.youtubeService
+          .encodeValue(`${this.showList[this.currentPlayingIndex].name} ${this.showList[this.currentPlayingIndex].album.artist.name}`);
         return this.youtubeService.searchMusic(encodeTarget, 1);
       } else {
         return of(null);
       }
     })).subscribe(res => {
       if (res) {
-        console.log(res.items[0].id.videoId);
+        console.log(this.currentPlayingIndex, 'e');
         this.audioControlService.player.cueVideoById(res.items[0].id.videoId);
-        this.currentPlayingIndex += 1;
         this.audioControlService.setMusicOnPanel(this.showList[this.currentPlayingIndex]);
         this.audioControlService.play();
       }

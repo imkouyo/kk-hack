@@ -14,11 +14,11 @@
       <div class="mobile-text">{{ artistName}}</div>
     </div>
     <div class="music-panel">
-      <fa-icon [icon]="faBackward"></fa-icon>
+      <fa-icon [icon]="faBackward" (click)="handleNext(-1)" ></fa-icon>
       <fa-icon *ngIf="!(this.audioControlService.isPlaying$ | async)" [icon]="faPlay" (click)="play()"></fa-icon>
       <fa-icon *ngIf="(this.audioControlService.isPlaying$ | async)" [icon]="faPause" (click)="pause()"></fa-icon>
       <fa-icon [icon]="faStop" (click)="stop()"></fa-icon>
-      <fa-icon [icon]="faForward"></fa-icon>
+      <fa-icon [icon]="faForward" (click)="handleNext(1)"></fa-icon>
     </div>
     <div class="time-panel">
       <div class="current-time">{{currentMin}}:{{currentSec}}</div>

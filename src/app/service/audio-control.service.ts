@@ -124,4 +124,7 @@ export class AudioControlService {
   setAudioCurrentSec(sec) {
     this.currentDuration.next(sec);
   }
+  setHandleNext(state) {
+    this.handleNext.next(state);
+  }
 }

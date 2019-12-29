@@ -18,6 +18,9 @@
       outline: none;
     }
   }
+  .tipsBar {
+    display: flex;
+  }
   .container {
     display: flex;
     width: 100%;
@@ -114,7 +117,22 @@
       align-items: center;
       justify-content: center;
       .comment-container {
+        .comment-overlay {
+          .cmt {
+            font-size: 24px;
+          }
+        }
         width:calc(100vw - 280px);
+        height: calc((100vw - 280px) * 9 / 16);
+        .typewriter {
+          line-height: 20px;
+          .typewriter-text {
+            margin-left: 60px;
+            font-size: 16px;
+            top: 15%;
+            left: 40px;
+          }
+        }
       }
     }
   }
@@ -125,6 +143,30 @@
       justify-content: center;
       .comment-container {
         width:calc(100vw - 110px);
+        height: calc((100vw - 110px) * 9 / 16);
+        .comment-overlay {
+          .cmt {
+            font-size: 16px;
+          }
+        }
+        .typewriter {
+          line-height: 12px;
+          .typewriter-text{
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            top: 30%;
+            left: 15px;
+            margin: 0 auto;
+          }
+          .complete-text {
+            margin: 20px auto;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            animation: showLetter 1s;
+          }
+        }
       }
     }
   }
@@ -177,6 +219,7 @@
     .route-btn {
       display: none;
     }
+    padding-bottom: 110px;
   }
 }
 

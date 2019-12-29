@@ -40,6 +40,7 @@ import { SearchResultCardComponent } from './component/search-result-card/search
 import { SearchPlaylistCardComponent } from './component/search-playlist-card/search-playlist-card.component';
 import { StepFormComponent } from './component/step-form/step-form.component';
 import { WhisperMusicCardComponent } from './component/whisper-music-card/whisper-music-card.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 // const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
@@ -86,6 +87,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     SocketIoModule.forRoot(config),
     MatAutocompleteModule,
     MatInputModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -10,12 +10,8 @@
     height: 40px;
     padding: 0 0 18px 24px;
     box-sizing: border-box;
-    a {
-      color: white;
-      text-decoration: none;
-    }
-    .svg {
-      fill: white;
+    .logo {
+      width: 100%;
     }
   }
   .nav-bar.group {
@@ -23,6 +19,8 @@
     flex-direction: column;
     align-items: baseline;
     box-sizing: border-box;
+    cursor: pointer;
+
     .nav-bar.item {
       display: flex;
       justify-content: start;

@@ -17,7 +17,7 @@ import {WhisperComponent} from '../../component/whisper/whisper.component';
 })
 export class CommentPageComponent implements OnInit, OnDestroy {
   videoSync = this.socket.fromEvent('switch music');
-  @ViewChild('commentBoard', {static: true }) elementRef;
+  @ViewChild('commentBoard', {static: true }) elementRef: ElementRef;
   text: string;
   isComplete = false;
   videoId = 'S_E2EHVxNAE';
@@ -42,7 +42,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
         this.storyList = videoDetail['story'];
         this.resetCompleteBoard();
         this.storySub.unsubscribe();
-        this.storySub = interval(8000).subscribe(value => {
+        this.storySub = interval(8000).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(value => {
           this.talk(this.storyList[value], this.storyList);
         });
       }
@@ -59,7 +59,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
           this.audioControlService.player.loadVideoById(videoDetail['videoId'], videoDetail['time']);
           this.audioControlService.setAudioCurrentSec(videoDetail['time']);
           this.storyList = videoDetail['story'];
-          this.storySub = interval(8000).subscribe(value => {
+          this.storySub = interval(8000).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(value => {
             if (value < this.storyList.length) {
               this.talk(this.storyList[value], this.storyList);
             }
@@ -79,7 +79,8 @@ export class CommentPageComponent implements OnInit, OnDestroy {
     } , 15000);
   }
   createComment(message: Messages) {
-    const randomHeight = Math.floor(Math.random() * 550);
+    console.log(this.elementRef);
+    const randomHeight = Math.floor(Math.random() * (this.elementRef.nativeElement.offsetHeight - 40));
     const cmt = this.renderer.createElement('div');
     this.renderer.addClass(cmt, 'cmt');
     this.renderer.setAttribute(cmt, 'color', message.color);
@@ -125,7 +126,6 @@ export class CommentPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stopSubscribe.next(true);
     this.audioControlService.stop();
-    this.storySub.unsubscribe();
   }
 
 }

@@ -3,4 +3,10 @@
     display: flex;
     flex-wrap: wrap;
   }
+  @media (max-width: 720px) {
+    .playlist {
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }

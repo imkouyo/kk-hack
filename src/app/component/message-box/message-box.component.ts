@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {faPaperPlane} from '@fortawesome/free-solid-svg-icons';
+import {faEye, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import {Messages} from '../../Interface/Messages';
 import { CommentService } from '../../service/comment.service';
 import {Socket} from 'ngx-socket-io';
@@ -13,9 +13,11 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class MessageBoxComponent implements OnInit, OnDestroy {
   faPaperPlane = faPaperPlane;
+  faEye = faEye;
   chatBox = this.socket.fromEvent('chat message');
   @ViewChild('content', {static: true}) contentEle;
   text: string;
+  isShowComment = true;
   messages: Messages[] = [];
   colorMap = ['yellow', 'green', 'blue', 'red', 'orange', 'purple'];
   stopSubscribe = new Subject<boolean>();
@@ -29,7 +31,9 @@ export class MessageBoxComponent implements OnInit, OnDestroy {
   sendMessage(text1) {
       const comment = {timestamp: '1', text: text1 , color: this.titleColorful()};
       this.messages.push(comment);
-      this.commentService.sendComment(comment);
+      if( this.isShowComment) {
+        this.commentService.sendComment(comment);
+      }
   }
   enterMessage(event) {
     if (event.key === 'Enter' && !!this.text) {
@@ -56,5 +60,8 @@ export class MessageBoxComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.stopSubscribe.next(true);
+  }
+  show(e) {
+    this.isShowComment = e.checked;
   }
 }
