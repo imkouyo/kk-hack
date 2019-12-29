@@ -60,9 +60,7 @@ export class AudioControlComponent implements OnInit {
     }
   }
   slideVolume(event) {
-    if (!this.audioControlService.isDisable) {
       this.audioControlService.player.setVolume(event.value);
-    }
   }
   play() {
     if (!this.audioControlService.isDisable) {
