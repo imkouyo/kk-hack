@@ -85,7 +85,6 @@ export class WhisperComponent implements OnInit, OnDestroy {
     this.popupRef.close(data);
   }
   searchSong(event) {
-    console.log(event.target.value, 'search');
     this.search$.next(event.target.value);
   }
   closePopup() {
@@ -97,7 +96,6 @@ export class WhisperComponent implements OnInit, OnDestroy {
   nextPage() {
     switch(this.step) {
       case 0:
-        console.log(!!this.userName && !!this.whisperName);
         this.isValid = !!this.userName && !!this.whisperName;
         if (this.isValid) {
           this.step += 1;
@@ -105,7 +103,6 @@ export class WhisperComponent implements OnInit, OnDestroy {
         }
         break;
       case 1:
-        console.log(!!this.songData);
         this.isValid = !!this.songData;
         if (this.isValid) {
           this.step += 1;
@@ -114,7 +111,6 @@ export class WhisperComponent implements OnInit, OnDestroy {
         }
         break;
       case 2:
-        console.log(!!this.storyText);
         this.isValid = !!this.storyText;
         if (this.isValid) {
           this.spinner.show()
@@ -125,7 +121,6 @@ export class WhisperComponent implements OnInit, OnDestroy {
             story: this.storyText
           }).pipe(catchError(error => of(false))).subscribe(
             value => {
-              console.log(value);
               this.spinner.hide();
               this.popupRef.close();
 
@@ -145,9 +140,7 @@ export class WhisperComponent implements OnInit, OnDestroy {
     const encodeTarget = this.youtubeService.encodeValue(`${event.song.name} ${event.song.artist}`);
     this.youtubeService.searchMusic(encodeTarget, 1).pipe(take(1)).subscribe(
       res => {
-        console.log(res);
         this.songData = {...event.song, id: res['items'][0]['id']['videoId']};
-        console.log(this.songData);
       }
     );
 

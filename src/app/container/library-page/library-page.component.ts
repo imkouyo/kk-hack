@@ -38,7 +38,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
       }
     }), switchMap(res => {
       if (res) {
-        console.log('here');
         if (JSON.parse(res.body).error) {
           this.route.navigate(['/kk-auth']).then();
           return of(null);

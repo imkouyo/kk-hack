@@ -17,12 +17,15 @@ import {WhisperComponent} from '../../component/whisper/whisper.component';
 })
 export class CommentPageComponent implements OnInit, OnDestroy {
   videoSync = this.socket.fromEvent('switch music');
+  handleNextWhisper = this.socket.fromEvent('handle next');
   @ViewChild('commentBoard', {static: true }) elementRef: ElementRef;
   text: string;
   isComplete = false;
   videoId = 'S_E2EHVxNAE';
   storyList;
   storySub: Subscription;
+  isDesktop;
+  nextWhisperTip = 'No next Whisper';
   @ViewChild('board', { static: true}) board: ElementRef;
   @ViewChild('completeBoard', { static: true}) completeBoard: ElementRef;
   stopSubscribe = new Subject<boolean>();
@@ -34,8 +37,20 @@ export class CommentPageComponent implements OnInit, OnDestroy {
               private http: HttpClient
   ) { }
   ngOnInit() {
-
+    this.isDesktop = document.body.offsetWidth > 720;
+    this.handleNextWhisper.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(
+      res => {
+        if (res['nextWhisper']) {
+          this.nextWhisperTip = `${res['nextWhisper']['creator']}'s Whisper`;
+        }
+      }
+    );
     this.videoSync.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(videoDetail => {
+      if (videoDetail['nextWhisper']) {
+        this.nextWhisperTip = `${videoDetail['nextWhisper']['creator']}'s Whisper`;
+      } else {
+        this.nextWhisperTip = 'No next Whisper';
+      }
       if (this.audioControlService.player) {
         this.audioControlService.player.cueVideoById(videoDetail['videoId']);
         this.audioControlService.player.seekTo(videoDetail['time']);
@@ -56,6 +71,11 @@ export class CommentPageComponent implements OnInit, OnDestroy {
         }
       })).subscribe(videoDetail => {
         if (videoDetail) {
+          if (videoDetail['nextWhisper']) {
+            this.nextWhisperTip = `${videoDetail['nextWhisper']['creator']}'s Whisper`;
+          } else {
+            this.nextWhisperTip = 'No next Whisper';
+          }
           this.audioControlService.player.loadVideoById(videoDetail['videoId'], videoDetail['time']);
           this.audioControlService.setAudioCurrentSec(videoDetail['time']);
           this.storyList = videoDetail['story'];
@@ -79,7 +99,6 @@ export class CommentPageComponent implements OnInit, OnDestroy {
     } , 15000);
   }
   createComment(message: Messages) {
-    console.log(this.elementRef);
     const randomHeight = Math.floor(Math.random() * (this.elementRef.nativeElement.offsetHeight - 40));
     const cmt = this.renderer.createElement('div');
     this.renderer.addClass(cmt, 'cmt');

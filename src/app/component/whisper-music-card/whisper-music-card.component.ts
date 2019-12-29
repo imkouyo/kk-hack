@@ -23,7 +23,6 @@ export class WhisperMusicCardComponent implements OnInit,OnChanges{
     this.musicName = this.musicData.name || '';
   }
   selectMusic() {
-    console.log({index: this.index, data: this.musicData});
     this.setMusic.emit({index: this.index,
       song: {
         name: this.musicName,

@@ -41,15 +41,12 @@ export class SearchPageComponent implements OnInit, OnDestroy{
       if (!!target) {
         return this.kkHackService.searchResult(target);
       } else {
-        console.log('null');
         return of(null);
       }
     })).subscribe(
       res => {
         if (res) {
           this.result = res.data;
-          // console.log(this.result.tracks['data'][0]['name'])
-          console.log(res);
           if (this.result.tracks['data'].length > 0) {
             this.topCover = res.data.tracks['data'][0]['album']['images'][1]['url'] || '';
             this.topName = res.data.tracks['data'][0]['name'] || '';
@@ -59,7 +56,6 @@ export class SearchPageComponent implements OnInit, OnDestroy{
             this.mode = 'notfound';
           }
         } else {
-          console.log(res);
           this.mode = 'init';
         }
       }

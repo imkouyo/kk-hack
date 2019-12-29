@@ -19,7 +19,6 @@ export class KkHackService {
     this.httpClient.get('/getToken').subscribe(
       token => {
         this.token = token.toString();
-        console.log(this.token);
         this.api = new Api(this.token);
         this.isReady.next(true);
       }

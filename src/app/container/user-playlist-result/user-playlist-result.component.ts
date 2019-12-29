@@ -37,7 +37,6 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
       }
     })).subscribe( res => {
       if (res) {
-        console.log(res);
         if (this.playlistType === 'me') {
           this.showList = res['tracks']['data'];
         } else {
@@ -47,7 +46,6 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
     });
     this.audioControlService.handleNext$.
     pipe(takeUntil(this.stopSubscribe.asObservable()), switchMap( state => {
-      console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         this.currentPlayingIndex += 1;
         const encodeTarget = this.youtubeService
@@ -63,7 +61,6 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
       }
     })).subscribe(res => {
       if (res) {
-        console.log(res.items[0].id.videoId);
         this.audioControlService.player.cueVideoById(res.items[0].id.videoId);
         this.audioControlService.setMusicOnPanel(this.showList[this.currentPlayingIndex]);
         this.audioControlService.play();
@@ -71,7 +68,6 @@ export class UserPlaylistResultComponent implements OnInit, OnDestroy {
     });
   }
   playingIndex(event) {
-    console.log(event, this.showList.length);
     this.currentPlayingIndex = event;
   }
   ngOnDestroy(): void {

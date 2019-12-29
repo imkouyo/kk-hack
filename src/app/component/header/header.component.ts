@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     fromEvent(this.inputBar.nativeElement, 'keydown').pipe(debounceTime(500), takeUntil(this.stopSub.asObservable())).subscribe(
       event =>  {
-        console.log(event['target'].value);
         this.searchService.setCategory(event['target'].value);
       });
     switch (this.router.url) {

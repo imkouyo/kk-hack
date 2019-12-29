@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="tipsBar">
-  <div class="tips">Next whisper: <div>123</div></div>
-  <button class="new-whisper" (click)="createWhisper()">Create new whisper</button>
+  <div class="tips">Next: </div><div>{{nextWhisperTip}}</div>
+  <button *ngIf="isDesktop" class="new-whisper" (click)="createWhisper()">Create new whisper</button>
+  <button *ngIf="!isDesktop" class="new-whisper" (click)="createWhisper()" style="width: 80px">Create</button>
 </div>
 
 <div class="container">

@@ -47,7 +47,6 @@ export class AudioControlService {
     return 0;
   }
   play() {
-    // console.log(this.player);
     this.player.playVideo();
   }
   pause() {
@@ -112,7 +111,6 @@ export class AudioControlService {
       }
     }
   setReadyState(state) {
-    console.log(state);
     this.playerState.next(state);
   }
   setPlayerState() {

@@ -40,7 +40,6 @@ export class MoodPlaylistComponent implements OnInit {
     });
     this.audioControlService.handleNext$.
     pipe(takeUntil(this.stopSubject.asObservable()), switchMap( state => {
-      console.log(state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         this.currentPlayingIndex += 1;
         const encodeTarget = this.youtubeService
@@ -56,7 +55,6 @@ export class MoodPlaylistComponent implements OnInit {
       }
     })).subscribe(res => {
       if (res) {
-        console.log(res.items[0].id.videoId);
         this.audioControlService.player.cueVideoById(res.items[0].id.videoId);
         this.audioControlService.setMusicOnPanel(this.showList[this.currentPlayingIndex]);
         this.audioControlService.play();
@@ -65,7 +63,6 @@ export class MoodPlaylistComponent implements OnInit {
   }
 
   playingIndex(event) {
-    console.log(event, this.showList.length);
     this.currentPlayingIndex = event;
   }
 

@@ -43,7 +43,6 @@ export class DailyRecommendComponent implements OnInit, OnDestroy {
       }
     })).subscribe(res => {
       if (res) {
-        console.log(res.items[0].id.videoId);
         this.audioControlService.player.cueVideoById(res.items[0].id.videoId);
         this.audioControlService.setMusicOnPanel(this.showList[this.currentPlayingIndex]);
         this.audioControlService.play();

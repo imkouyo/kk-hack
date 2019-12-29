@@ -20,7 +20,6 @@ export class UserPlaylistComponent implements OnInit, OnDestroy {
     this.kkHttpClientService.getClientAllPlaylist().pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(
       list => {
         this.playlist = list['data'];
-        console.log(list);
       }
     );
   }

@@ -1,28 +1,38 @@
 :host{
   width: 100%;
   height: 100%;
-  .new-whisper {
-    width: 160px;
-    height: 40px;
-    background-color: #4184c5;
-    border-radius: 5px;
-    font-size: 16px;
-    color: white;
-    border: 0;
-    margin: 24px 24px 24px auto;
-    cursor: pointer;
-    &:hover {
-      background-color: #4174bb;
-    }
-    &:focus {
-      outline: none;
-    }
-  }
   .tipsBar {
     display: flex;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    align-items: center;
+    box-sizing: border-box;
+    .tips {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    .new-whisper {
+      width: 160px;
+      height: 40px;
+      background-color: #4184c5;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-left: auto;
+      color: white;
+      border: 0;
+      cursor: pointer;
+      &:hover {
+        background-color: #4174bb;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
   }
   .container {
     display: flex;
+    margin: 0 auto;
     width: 100%;
     max-width: 1380px;
     align-items: center;

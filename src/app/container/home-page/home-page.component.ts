@@ -40,14 +40,12 @@ export class HomePageComponent implements OnInit, OnDestroy {
         return of(null);
       }
     })).subscribe(res => {
-      console.log(res);
       if (res) {
         this.showList = res.data.data;
       }
     });
     this.audioControlService.handleNext$.
     pipe(takeUntil(this.stopSubscribe.asObservable()), switchMap( state => {
-      console.log(this.currentPlayingIndex ,'b', state);
       if (state === 1 && this.currentPlayingIndex + 1 < this.showList.length) {
         this.currentPlayingIndex += 1;
         const encodeTarget = this.youtubeService
@@ -63,7 +61,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
       }
     })).subscribe(res => {
       if (res) {
-        console.log(this.currentPlayingIndex, 'e');
         this.audioControlService.player.cueVideoById(res.items[0].id.videoId);
         this.audioControlService.setMusicOnPanel(this.showList[this.currentPlayingIndex]);
         this.audioControlService.play();
@@ -85,9 +82,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.stopSubscribe.next(true);
-  }
-  videoData() {
-    this.http.get('/hello').subscribe(value => console.log(value));
   }
 
 }

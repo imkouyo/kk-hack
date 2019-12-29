@@ -49,12 +49,10 @@ export class AudioControlComponent implements OnInit {
   }
 
   videoReady() {
-    if (!this.audioControlService.isDisable) {
       const duration = this.audioControlService.duration();
       this.volume = this.audioControlService.player.getVolume();
       this.durationMin = this.timeFormatService.secToMin(duration);
       this.durationSec = this.timeFormatService.secToSec(duration);
-    }
   }
   slideTime(event) {
     if (!this.audioControlService.isDisable) {
