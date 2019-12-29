@@ -38,6 +38,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
   ) { }
   ngOnInit() {
     this.isDesktop = document.body.offsetWidth > 720;
+    this.audioControlService.setMusicOnPanel('');
     this.handleNextWhisper.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(
       res => {
         if (res['nextWhisper']) {
