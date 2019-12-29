@@ -41,8 +41,8 @@ import { SearchPlaylistCardComponent } from './component/search-playlist-card/se
 import { StepFormComponent } from './component/step-form/step-form.component';
 import { WhisperMusicCardComponent } from './component/whisper-music-card/whisper-music-card.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-// const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
+const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
+// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
   declarations: [
     AppComponent,
