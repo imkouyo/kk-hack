@@ -42,9 +42,17 @@ export class AudioControlComponent implements OnInit {
       this.audioControlService.audioState(state);
     });
     this.audioControlService.musicPanel$.subscribe(music => {
-      this.musicName = music.name;
-      this.artistName = music.album.artist.name;
-      this.coverImage = music.album.images[0].url;
+      if (!!music) {
+        this.musicName = music.name;
+        this.artistName = music.album.artist.name;
+        this.coverImage = music.album.images[0].url;
+      } else {
+        this.musicName = '';
+        this.artistName = '';
+        this.coverImage = '';
+      }
+
+
     });
   }
 
