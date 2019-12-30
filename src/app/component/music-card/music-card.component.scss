@@ -18,6 +18,8 @@
     box-sizing: border-box;
     height: 70px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
   }
   .text {
     position: relative;
