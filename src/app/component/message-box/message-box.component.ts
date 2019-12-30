@@ -5,6 +5,7 @@ import { CommentService } from '../../service/comment.service';
 import {Socket} from 'ngx-socket-io';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {KkHttpClientService} from '../../service/kk-http-client.service';
 
 @Component({
   selector: 'app-message-box',
@@ -21,23 +22,30 @@ export class MessageBoxComponent implements OnInit, OnDestroy {
   messages: Messages[] = [];
   colorMap = ['yellow', 'green', 'blue', 'red', 'orange', 'purple'];
   stopSubscribe = new Subject<boolean>();
-  constructor(private commentService: CommentService, private socket: Socket) { }
+  chatBoxName = 'anonymous';
+  constructor(private commentService: CommentService, private socket: Socket, private kkHttpClientService: KkHttpClientService) { }
 
   ngOnInit() {
     this.chatBox.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(value => {
-      this.sendMessage(value['message']);
+      this.sendMessage(value);
+    });
+    this.chatBoxName = `Anonymous#${Math.floor(Math.random() * 9999)}: `;
+    this.kkHttpClientService.userName$.subscribe( name => {
+      if (!!name) {
+        this.chatBoxName = `${name}: `;
+      }
     });
   }
-  sendMessage(text1) {
-      const comment = {timestamp: '1', text: text1 , color: this.titleColorful()};
+  sendMessage(res) {
+      const comment = {timestamp: '1', text: res.message , color: this.titleColorful(), userName: res.user};
       this.messages.push(comment);
-      if( this.isShowComment) {
+      if (this.isShowComment) {
         this.commentService.sendComment(comment);
       }
   }
   enterMessage(event) {
     if (event.key === 'Enter' && !!this.text) {
-      this.socket.emit('chat message', {message: this.text});
+      this.socket.emit('chat message', {message: this.text, user: this.chatBoxName});
       this.text = '';
       setTimeout(() => this.scrollToBottom() , 200);
     }

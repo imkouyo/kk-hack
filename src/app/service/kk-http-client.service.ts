@@ -9,6 +9,8 @@ export class KkHttpClientService {
 
   private userCode =  new BehaviorSubject<string>('');
   public  userCode$ = this.userCode.asObservable();
+  private userName = new BehaviorSubject<string>('');
+  public  userName$ = this.userName.asObservable();
   // tslint:disable-next-line:variable-name
   private _accessToken;
   BaseURL = 'https://api.kkbox.com/v1.1/me';
@@ -45,6 +47,9 @@ export class KkHttpClientService {
   getClientPlaylist(id) {
     this.option = { headers: { Authorization: `Bearer ${this._accessToken}`} };
     return this.http.get(`${this.BaseURL}/playlists/${id}`, this.option);
+  }
+  setUserName(name) {
+    this.userName.next(name);
   }
 
 }

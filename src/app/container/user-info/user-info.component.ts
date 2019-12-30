@@ -29,6 +29,7 @@ export class UserInfoComponent implements OnInit {
         if (res) {
           this.isLogin = true;
           this.userName = res.name;
+          this.kkHttpClientService.setUserName(res.name);
           this.userImage = res.images[0].url;
         }
 

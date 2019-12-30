@@ -10,7 +10,7 @@
   </div>
   <div class="chat-content" #content>
     <div class="message" *ngFor="let mes of messages">
-      <p class="text" [attr.color]="mes.color">{{mes.text}}</p>
+      <p class="text" [attr.color]="mes.color" [attr.name]="mes.userName">{{mes.text}}</p>
     </div>
   </div>
   <div class="chat-bottom">

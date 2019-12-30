@@ -3,16 +3,8 @@ import {faAngleLeft, faAngleRight, faSearch} from '@fortawesome/free-solid-svg-i
 import {fromEvent, Subject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {SearchService} from '../../service/search.service';
-import {ActivatedRoute, Router} from "@angular/router";
-import {CommentPageComponent} from "../../container/comment-page/comment-page.component";
-import {SearchPageComponent} from "../../container/search-page/search-page.component";
-import {HomePageComponent} from "../../container/home-page/home-page.component";
-import {MoodPlaylistComponent} from "../../container/mood-playlist/mood-playlist.component";
-import {LibraryPageComponent} from "../../container/library-page/library-page.component";
-import {UserInfoComponent} from "../../container/user-info/user-info.component";
-import {UserPlaylistComponent} from "../../container/user-playlist/user-playlist.component";
-import {DailyRecommendComponent} from "../../container/daily-recommend/daily-recommend.component";
-import {UserPlaylistResultComponent} from "../../container/user-playlist-result/user-playlist-result.component";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
