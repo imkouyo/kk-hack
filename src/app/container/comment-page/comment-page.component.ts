@@ -77,6 +77,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
           } else {
             this.nextWhisperTip = 'No next Whisper';
           }
+          this.audioControlService.player.setVolume(50);
           this.audioControlService.player.loadVideoById(videoDetail['videoId'], videoDetail['time']);
           this.audioControlService.setAudioCurrentSec(videoDetail['time']);
           this.storyList = videoDetail['story'];

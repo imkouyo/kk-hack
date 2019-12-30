@@ -17,7 +17,7 @@ import {
   MatExpansionModule,
   MatInputModule,
   MatSliderModule,
-  MatTabsModule
+  MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -42,7 +42,7 @@ import { StepFormComponent } from './component/step-form/step-form.component';
 import { WhisperMusicCardComponent } from './component/whisper-music-card/whisper-music-card.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
-// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
+// const config: SocketIoConfig = { url: 'http://localhost:3000', options:ㄆ: {}};
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,6 +88,7 @@ const config: SocketIoConfig = { url: 'http://ableave.com', options: {}};
     MatAutocompleteModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent],

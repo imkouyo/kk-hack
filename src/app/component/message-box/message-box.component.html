@@ -5,7 +5,7 @@
     </div>
     <div class="comment-group">
       <fa-icon [icon]="faEye"></fa-icon>
-      <mat-checkbox  (change)="show($event)" [checked]="true"></mat-checkbox>
+      <mat-checkbox  (change)="show($event)" matTooltip="Show Comment in Viewer" [checked]="true"></mat-checkbox>
     </div>
   </div>
   <div class="chat-content" #content>
