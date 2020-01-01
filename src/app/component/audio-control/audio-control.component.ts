@@ -71,14 +71,10 @@ export class AudioControlComponent implements OnInit {
       this.audioControlService.player.setVolume(event.value);
   }
   play() {
-    if (!this.audioControlService.isDisable) {
       this.audioControlService.play();
-    }
   }
   pause() {
-    if (!this.audioControlService.isDisable) {
       this.audioControlService.pause();
-    }
   }
   stop() {
     if (!this.audioControlService.isDisable) {
@@ -86,7 +82,7 @@ export class AudioControlComponent implements OnInit {
     }
   }
   initVideo(event) {
-    // this.audioControlService.player = event.target;
+    this.audioControlService.player = event.target;
     this.audioControlService.setPlayerState();
   }
   handleVideo(event) {
