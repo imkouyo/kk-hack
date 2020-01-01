@@ -1,6 +1,7 @@
 import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import { KkHackService } from './service/kk-hack.service';
 import { HttpClient } from '@angular/common/http';
+import {AudioControlService} from "./service/audio-control.service";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit{
-  constructor(private kk: KkHackService,) {
+  constructor(private kk: KkHackService,private audioControlService: AudioControlService) {
   }
 
   ngOnInit(): void {
@@ -19,13 +20,8 @@ export class AppComponent implements OnInit, AfterViewInit{
         width: '100%',
         videoId: 'Bey4XXJAqS8',
         playerVars: {'autoplay': 1, 'rel': 0, fs: false, playsinline: true},
-        events: {
-          'onReady': () => {
-          },
-          'onStateChange': () => {
-          }
-        }
       });
+      this.audioControlService.player = player;
     };
 
   }

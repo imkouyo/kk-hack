@@ -86,7 +86,7 @@ export class AudioControlComponent implements OnInit {
     }
   }
   initVideo(event) {
-    this.audioControlService.player = event.target;
+    // this.audioControlService.player = event.target;
     this.audioControlService.setPlayerState();
   }
   handleVideo(event) {
