@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, AfterViewInit{
         height: '100%',
         width: '100%',
         videoId: 'Bey4XXJAqS8',
-        playerVars: {'autoplay': 0, 'rel': 0, 'controls': 2, playsinline: true},
+        playerVars: {'autoplay': 1, 'rel': 0, fs: false, playsinline: true},
         events: {
           'onReady': () => {
           },
