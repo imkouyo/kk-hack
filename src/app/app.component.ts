@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import { KkHackService } from './service/kk-hack.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewChecked{
+export class AppComponent implements OnInit, AfterViewInit{
   constructor(private kk: KkHackService,) {
   }
 
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewChecked{
     };
 
   }
-  ngAfterViewChecked(): void {
+  ngAfterViewInit(): void {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(tag);
