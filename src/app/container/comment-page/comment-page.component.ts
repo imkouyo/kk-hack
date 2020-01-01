@@ -77,9 +77,9 @@ export class CommentPageComponent implements OnInit, OnDestroy {
           } else {
             this.nextWhisperTip = 'No next Whisper';
           }
-          this.audioControlService.player.setVolume(50);
           this.audioControlService.player.loadVideoById(videoDetail['videoId'], videoDetail['time']);
           this.audioControlService.setAudioCurrentSec(videoDetail['time']);
+          this.audioControlService.player.setVolume(50);
           this.storyList = videoDetail['story'];
           this.storySub = interval(8000).pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe(value => {
             if (value < this.storyList.length) {
@@ -89,7 +89,9 @@ export class CommentPageComponent implements OnInit, OnDestroy {
           // this.talkStory(videoDetail['story']).then();
         }
       });
-    this.audioControlService.isDisable = true;
+    if (this.isDesktop) {
+      this.audioControlService.isDisable = true;
+    }
     this.commentService.comment.pipe(takeUntil(this.stopSubscribe.asObservable())).subscribe( (comment) => this.insert(comment));
   }
 
