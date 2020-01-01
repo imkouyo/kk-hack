@@ -149,6 +149,7 @@ export class CommentPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stopSubscribe.next(true);
     this.audioControlService.stop();
+    this.audioControlService.isDisable = true;
   }
 
 }

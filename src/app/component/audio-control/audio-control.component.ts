@@ -63,6 +63,7 @@ export class AudioControlComponent implements OnInit {
       this.durationSec = this.timeFormatService.secToSec(duration);
   }
   slideTime(event) {
+    console.log(!this.audioControlService.isDisable);
     if (!this.audioControlService.isDisable) {
       this.audioControlService.audioSeek(event.value);
     }
